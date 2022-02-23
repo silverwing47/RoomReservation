@@ -196,7 +196,7 @@ color:#2c7715;
 }
 
 .button-5:active {
-  background-color: #c85000;
+  background-color: #338600;;
   box-shadow: rgba(0, 0, 0, .06) 0 2px 4px;
   transform: translateY(0);
 }
@@ -205,10 +205,13 @@ color:#2c7715;
     color: #fff;
     background-color: #6fff78;
     border-color: #6fff78;
+    background: #338600;
 }
 
 .btn-danger:hover,
-.btn-danger:focus {
+.btn-danger:focus,
+.btn-danger:active{
+  background: #338600;
   background-color: #338600;
   box-shadow: rgba(0, 0, 0, 0.1) 0 4px 12px;
   border-color: #6fff78;

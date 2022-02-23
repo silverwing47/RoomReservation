@@ -99,7 +99,7 @@
         			</div>
         		</div>
         	</div>
-          <a href="index.html"><button type="button" class="btn btn-danger" style="position:relative; top:60%; left:930%; font-size:22px;">Return Home</button></a>
+          <a href="index.html"><button type="button" class="button-5" style="position:relative; top:60%; left:740%; font-size:22px;">Return Home</button></a>
     </header>
 
 
