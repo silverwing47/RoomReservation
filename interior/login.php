@@ -38,7 +38,10 @@
     <!-- Core JS -->
     <!-- <script src="js/scripts.js"></script> -->
     <link rel="stylesheet" href="login/css/mystyle.css">
-
+    <style>
+      body {
+        overflow:auto;}
+    </style>
   </head>
   <body>
     <header id="home" class="header-area pt-100">
@@ -99,7 +102,7 @@
         			</div>
         		</div>
         	</div>
-          <a href="index.html"><button type="button" class="button-5" style="position:relative; top:60%; left:740%; font-size:22px;">Return Home</button></a>
+          <a href="index.html"><button type="button" class="button-5" style="position:absolute; top:95%; left:71%; font-size:22px;">Return Home</button></a>
     </header>
 
 
