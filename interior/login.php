@@ -104,7 +104,45 @@
         	</div>
           <a href="index.html"><button type="button" class="button-5" style="position:absolute; top:95%; left:71%; font-size:22px;">Return Home</button></a>
     </header>
+    <?php
+      $con =mysqli_connect("localhost","root","","db_resrv");
+      $err="";
+      if($con){
+        if(isset($_POST['btnLogin'])){
+          $email=$_POST['logEmail'];
+            $pwd=$_POST['logPass'];
+            $query="select * from tbl_client where email='$email' and password='$pwd'";
+            $result = mysqli_query($con,$query);
+            $count = mysqli_num_rows($result);
+            if($count ==0)
+              echo "<script language='javascript'> alert('Incorrect username or password');</script>";
+            else{
+              $row=mysqli_fetch_assoc($result);
+              $_SESSION['login']=$row['email'];
+              header("Location: ../indexx.php");
+            }
+        }
 
+        if(isset($_POST['btnRegister'])){
+            $fname=$_POST['fname'];
+            $lname=$_POST['lname'];
+            $email=$_POST['regEmail'];
+            $pwd=$_POST['regPass'];
+            $phone=$_POST['phone'];
+            $query="INSERT INTO tbl_client (firstName, lastName, email, password, phone) VALUES ('$fname','$lname', '$email','$pwd', '$phone')";
+            mysqli_query($con,$query);
+            header("Location: login.php");
+            // $count = mysqli_num_rows($result);
+            // if($count ==0)
+            //   echo "<script language='javascript'> alert('Incorrect username or password');</script>";
+            // else{
+            //   $row=mysqli_fetch_assoc($result);
+            //   $_SESSION['login']=$row['email'];
+            //   header("Location: ../index.php");
+            // }
+        }
+      }
+     ?>
 
   </body>
 </html>
