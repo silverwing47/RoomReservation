@@ -584,11 +584,15 @@
                                                       </div>
                                                       <div class='form-group mb-2'>
                                                         <label >Timeslot</label>
-                                                        <input type='text' class='form-control' value='". $row2["timeslot"] ."' name='Timeslot'>
+                                                        <select class='form-control' name='Timeslot'>
+                                                          <option value='". $row2["timeslot"] ."'>". $row2["timeslot"] ."</option>
+                                                        </select>
                                                       </div>
                                                       <div class='form-group mb-2'>
                                                         <label >Availability</label>
-                                                        <input type='text' class='form-control' value='". $row2["status"] ."' name='Availability'>
+                                                        <select class='form-control' name='Availability'>
+                                                          <option value='". $row2["status"] ."'>". $row2["status"] ."</option>
+                                                        </select>
                                                       </div>
                                                       <br>
                                                       <div class='form-group mb-2'>
