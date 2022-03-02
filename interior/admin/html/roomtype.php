@@ -441,6 +441,7 @@
                     ><i class="mdi mdi-border-inside"></i
                     ><span class="hide-menu">Room Reservation Table</span></a>
                 </li>
+
                 <li class="sidebar-item">
                   <a
                     class="sidebar-link waves-effect waves-dark sidebar-link"
@@ -499,7 +500,7 @@
                 <div class="card-body">
                   <h5 class="card-title">Room Table</h5>
                   <br>
-                  <a type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#addRoom">Add Room</a>
+                  <a type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#addUser">Add Room</a>
                   <br><br>
                   <div class="table-responsive">
                     <table
@@ -508,35 +509,34 @@
                     >
                       <thead>
                         <tr>
-                          <th>Reservation ID</th>
-                          <th>Name</th>
-                          <th>Address</th>
-                          <th>Room Number</th>
-                          <th>Date</th>
-                          <th>Time Slot</th>
+                          <th>ID</th>
+                          <th>Type</th>
+                          <th>price_morning</th>
+                          <th>price_afternoon</th>
+                          <th>price_evening</th>
+
                           <th>Edit Reservation</th>
                         </tr>
                       </thead>
                       <tbody>
                         <?php
-                                            $sql = "SELECT * FROM tbl_client";
+                                            $sql = "SELECT * FROM tbl_roomtype";
                                             $result = $conn->query($sql);
                                             if ($result->num_rows > 0) {
                                             // output data of each row
                                             while($row = $result->fetch_assoc()) {
-                                            echo "<tr><td>" . $row["userID"]. "</td><td>" . $row["firstname"] . "</td><td>"
-                                            . $row["lastname"]. "</td><td>" . $row["email"] . "</td>
-                                            <td>" . $row["password"] . "</td><td>" . $row["phone"] . "</td>
-                                            <td>" . "<a href='#' class='hehe'><i class='fas fa-edit' data-toggle='modal'data-target='#updateUser".$row['userID']. "'>Update
-                                            </i></a> &nbsp <a href='#' class='hehe'><i class='fas fa-trash-alt' data-toggle='modal' data-target='#deleteUser". $row['userID']. "'>Delete</i></a>". "</td>
+                                            echo "<tr><td>" . $row["id"]. "</td><td>" . $row["type"] . "</td><td>"
+                                            . $row["price_morning"]. "</td><td>" . $row["price_afternoon"] . "</td><td>" . $row["price_evening"] . "</td>
+                                            <td>" . "<a href='#' class='hehe'><i class='fas fa-edit' data-toggle='modal'data-target='#updateUser".$row['id']. "'>Update
+                                            </i></a> &nbsp <a href='#' class='hehe'><i class='fas fa-trash-alt' data-toggle='modal' data-target='#deleteUser". $row['id']. "'>Delete</i></a>". "</td>
                                             </tr>";
 
-                                            $sql2 = "SELECT * FROM tbl_client WHERE userID = ' ".$row['userID']." ' ";
+                                            $sql2 = "SELECT * FROM tbl_roomtype WHERE id = ' ".$row['id']." ' ";
                                             $result2 = mysqli_query($conn,$sql2);
                                             $row2=mysqli_fetch_assoc($result2);
-                                            $user = $row['userID'];
+                                            $user = $row['id'];
 
-                                            echo "<div id='updateUser".$row['userID']."' class='modal fade' role='dialog'>
+                                            echo "<div id='updateUser".$row['id']."' class='modal fade' role='dialog'>
 
                                             <div class='modal-dialog'>
 
@@ -552,27 +552,24 @@
                                                     <h3 class='text-center mb-3'>Update User</h3>
                                                     <br>
                                                     <form class='signup-form'  method='POST'>
-                                                        <input type='text' class='form-control' value='". $row2["userID"] ."' name='user_ID' hidden>
+                                                        <input type='text' class='form-control' value='". $row2["id"] ."' name='id' hidden>
                                                       <div class='form-group mb-2'>
-                                                        <label for='name'>First Name</label>
-                                                        <input type='text' class='form-control' value='". $row2["firstname"] ."' name='fName'>
+                                                        <label for='name'>type</label>
+                                                        <input type='text' class='form-control' value='". $row2["type"] ."' name='type'>
                                                       </div>
                                                       <div class='form-group mb-2'>
-                                                        <label for='name'>Last Name</label>
-                                                        <input type='text' class='form-control' value='". $row2["lastname"] ."' name='lName'>
+                                                        <label for='name'>price_morninge</label>
+                                                        <input type='text' class='form-control' value='". $row2["price_morning"] ."' name='price_morning'>
                                                       </div>
                                                       <div class='form-group mb-2'>
-                                                        <label for='email'>Email</label>
-                                                        <input type='text' class='form-control' value='". $row2["email"] ."' name='Email' >
+                                                        <label for='name'>price_afternoon</label>
+                                                        <input type='text' class='form-control' value='". $row2["price_afternoon"] ."' name='price_afternoon' >
                                                       </div>
                                                       <div class='form-group mb-2'>
-                                                        <label >Password</label>
-                                                        <input type='text' class='form-control' value='". $row2["password"] ."' name='Password'>
+                                                        <label for='name'>price_evening</label>
+                                                        <input type='text' class='form-control' value='". $row2["price_evening"] ."' name='price_evening'>
                                                       </div>
-                                                      <div class='form-group mb-2'>
-                                                        <label >Phone</label>
-                                                        <input type='text' class='form-control' value='". $row2["phone"] ."' name='Phone'>
-                                                      </div>
+
                                                       <br>
                                                       <div class='form-group mb-2'>
                                                         <button type='submit' class='form-control btn btn-primary rounded submit px-3' name='btnUpdateUser'>Upate User</button>
@@ -592,7 +589,7 @@
                                             </div>
                                           </div>";
 
-                                          echo "<div id='deleteUser".$row['userID']."' class='modal fade' role='dialog'>
+                                          echo "<div id='deleteUser".$row['id']."' class='modal fade' role='dialog'>
 
                                           <div class='modal-dialog'>
 
@@ -606,9 +603,9 @@
                                                   <h3 class='text-center mb-3'>Delete User</h3>
                                                   <br>
                                                   <form class='signup-form'  method='POST'>
-                                                      <input type='text' class='form-control' value=' ". $row2["userID"] ." ' name='deluserID' hidden>
+                                                        <input type='text' class='form-control' value=' ". $row2["id"] ." ' name='deluserID' hidden>
                                                     <br>
-                                                      <input type='text' class='form-control' value=' ". $row2["firstname"] ." " . $row2["lastname"] ." ' name='user_Name' readonly>
+                                                      <input type='text' class='form-control' value=' ". $row2["type"] ." " . $row2["price_morning"] ." " . $row2["price_afternoon"] ." " . $row2["price_evening"] ." ' name='user_Name' readonly>
                                                     <p> Do you want to delete this User? </p>
                                                     <div class='form-group mb-2'>
                                                       <button type='submit' class='form-control btn btn-primary rounded submit px-3' name='btnDeleteUser'>Delete User</button>
@@ -664,25 +661,22 @@
                   <br>
                   <form action="#" class="signup-form"  method="POST">
                     <div class="form-group mb-2">
-                      <label for="name">First Name</label>
-                      <input type="text" class="form-control" placeholder="" name="fname">
+                      <label for="name">Type</label>
+                      <input type="text" class="form-control" placeholder="" name="type">
                     </div>
                     <div class="form-group mb-2">
-                      <label for="name">Last Name</label>
-                      <input type="text" class="form-control" placeholder="" name="lname">
+                      <label for="name">price_morning</label>
+                      <input type="text" class="form-control" placeholder="" name="price_morning">
                     </div>
                     <div class="form-group mb-2">
-                      <label for="email">Email</label>
-                      <input type="text" class="form-control" placeholder="" name="email">
+                      <label for="name">price_afternoon</label>
+                      <input type="text" class="form-control" placeholder="" name="price_afternoon">
                     </div>
                     <div class="form-group mb-2">
-                      <label >Password</label>
-                      <input type="password" class="form-control" placeholder="" name="password">
+                      <label for="name">price_evening</label>
+                      <input type="text" class="form-control" placeholder="" name="price_evening">
                     </div>
-                    <div class="form-group mb-2">
-                      <label >Phone</label>
-                      <input type="text" class="form-control" placeholder="" name="phone">
-                    </div>
+
                     <br>
                     <div class="form-group mb-2">
                       <button type="submit" class="form-control btn btn-primary rounded submit px-3" name="btnAddUser">Add User</button>
@@ -761,44 +755,44 @@
   </body>
 
   <?php
-  //   if(isset($_POST['btnAddUser'])){
-  //       $fname=$_POST['fname'];
-  //       $lname=$_POST['lname'];
-  //       $email=$_POST['email'];
-  //       $pwd=$_POST['password'];
-  //       $phone=$_POST['phone'];
-  //       // $query="INSERT INTO usertbl (firstName, lastName, email, password, phone) VALUES ('$fname','$lname', '$email',SHA('$pwd'), '$phone')"; //for encryption of password utilize SHA()
-  //       $query="INSERT INTO tbl_client (firstname, lastname, email, password, phone) VALUES ('$fname','$lname', '$email','$pwd', '$phone')";
-  //       mysqli_query($conn,$query);
-  //       header("Location: usertable.php");
-  //       // $count = mysqli_num_rows($result);
-  //       // if($count ==0)
-  //       //   echo "<script language='javascript'> alert('Incorrect username or password');</script>";
-  //       // else{
-  //       //   $row=mysqli_fetch_assoc($result);
-  //       //   $_SESSION['login']=$row['email'];
-  //       //   header("Location: ../index.php");
-  //       // }
-  //   }
-  // if(isset($_POST['btnUpdateUser'])){
-  //
-  //       $fName=$_POST['fName'];
-  //       $user=$_POST['user_ID'];
-  //       $lName=$_POST['lName'];
-  //       $Email=$_POST['Email'];
-  //       $Pwd=$_POST['Password'];
-  //       $Phone=$_POST['Phone'];
-  //
-  //       $sql3 = mysqli_query($conn,"UPDATE tbl_client set firstname='$fName',lastname='$lName',email='$Email',password='$Pwd',phone='$Phone' where userID = $user");
-  //       header("Location: usertable.php");
-  //
-  //   }
-  //   if(isset($_POST['btnDeleteUser'])){
-  //           $deluser=$_POST['deluserID'];
-  //           $sql4 = mysqli_query($conn,"DELETE FROM tbl_client WHERE userID = $deluser");
-  //           header("Location: usertable.php");
-  //
-  //     }
-  //     ?>
+  if(isset($_POST['btnAddRoomType'])){
+      $type=$_POST['type'];
+      $price_morning=$_POST['price_morning'];
+      $price_afternoon=$_POST['price_afternoon'];
+      $price_evening=$_POST['price_evening'];
+
+      // $query="INSERT INTO usertbl (firstName, lastName, email, password, phone) VALUES ('$fname','$lname', '$email',SHA('$pwd'), '$phone')"; //for encryption of password utilize SHA()
+      $query="INSERT INTO tbl_roomtype (type, price_morning, price_afternoon, price_evening, ) VALUES ('$type','$price_morning', '$price_afternoon','$price_evening')";
+      mysqli_query($conn,$query);
+      header("Location: roomtype.php");
+      // $count = mysqli_num_rows($result);
+      // if($count ==0)
+      //   echo "<script language='javascript'> alert('Incorrect username or password');</script>";
+      // else{
+      //   $row=mysqli_fetch_assoc($result);
+      //   $_SESSION['login']=$row['email'];
+      //   header("Location: ../index.php");
+      // }
+  }
+  if(isset($_POST['btnUpdateUser'])){
+
+        $type=$_POST['type'];
+        $id=$_POST['id'];
+        $price_morning=$_POST['price_morning'];
+        $price_afternoon=$_POST['price_afternoon'];
+        $price_evening=$_POST['price_evening'];
+
+
+        $sql3 = mysqli_query($conn,"UPDATE tbl_roomtype set type='$type',price_morning='$price_morning',price_afternoon='$price_afternoon',price_evening='$price_evening' where id = $id");
+        header("Location: roomtype.php");
+
+    }
+    if(isset($_POST['btnDeleteUser'])){
+            $deluser=$_POST['deluserID'];
+            $sql4 = mysqli_query($conn,"DELETE FROM tbl_roomtype WHERE id = $deluser");
+            header("Location: roomtype.php");
+
+      }
+      ?>
 
 </html>
