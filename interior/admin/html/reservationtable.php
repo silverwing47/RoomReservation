@@ -433,23 +433,31 @@
                   ><i class="mdi mdi-border-inside"></i
                   ><span class="hide-menu">User/Client Table</span></a
                 >
-                <li class="sidebar-item">
-                  <a
-                    class="sidebar-link waves-effect waves-dark sidebar-link"
-                    href="roomtable.php"
-                    aria-expanded="false"
-                    ><i class="mdi mdi-border-inside"></i
-                    ><span class="hide-menu">Room Reservation Table</span></a>
-                </li>
-                <li class="sidebar-item">
-                  <a
-                    class="sidebar-link waves-effect waves-dark sidebar-link"
-                    href="reservationtable.php"
-                    aria-expanded="false"
-                    ><i class="mdi mdi-border-inside"></i
-                    ><span class="hide-menu">Reservation Table(Real)</span></a
-                  >
-                </li>
+              </li>
+              <li class="sidebar-item">
+                <a
+                  class="sidebar-link waves-effect waves-dark sidebar-link"
+                  href="roomtype.php"
+                  aria-expanded="false"
+                  ><i class="mdi mdi-border-inside"></i
+                  ><span class="hide-menu">Room Type Table</span></a>
+              </li>
+              <li class="sidebar-item">
+                <a
+                  class="sidebar-link waves-effect waves-dark sidebar-link"
+                  href="room_table.php"
+                  aria-expanded="false"
+                  ><i class="mdi mdi-border-inside"></i
+                  ><span class="hide-menu">Room Table</span></a>
+              </li>
+              <li class="sidebar-item">
+                <a
+                  class="sidebar-link waves-effect waves-dark sidebar-link"
+                  href="reservationtable.php"
+                  aria-expanded="false"
+                  ><i class="mdi mdi-border-inside"></i
+                  ><span class="hide-menu">Reservation Table</span></a
+                >
               </li>
             </ul>
           </nav>

@@ -433,23 +433,31 @@
                   ><i class="mdi mdi-border-inside"></i
                   ><span class="hide-menu">User/Client Table</span></a
                 >
-                <li class="sidebar-item">
-                  <a
-                    class="sidebar-link waves-effect waves-dark sidebar-link"
-                    href="roomtable.php"
-                    aria-expanded="false"
-                    ><i class="mdi mdi-border-inside"></i
-                    ><span class="hide-menu">Room Reservation Table</span></a>
-                </li>
-
-                <li class="sidebar-item">
-                  <a
-                    class="sidebar-link waves-effect waves-dark sidebar-link"
-                    href="roomtype.php"
-                    aria-expanded="false"
-                    ><i class="mdi mdi-border-inside"></i
-                    ><span class="hide-menu">Room Type Table</span></a>
-                </li>
+              </li>
+              <li class="sidebar-item">
+                <a
+                  class="sidebar-link waves-effect waves-dark sidebar-link"
+                  href="roomtype.php"
+                  aria-expanded="false"
+                  ><i class="mdi mdi-border-inside"></i
+                  ><span class="hide-menu">Room Type Table</span></a>
+              </li>
+              <li class="sidebar-item">
+                <a
+                  class="sidebar-link waves-effect waves-dark sidebar-link"
+                  href="room_table.php"
+                  aria-expanded="false"
+                  ><i class="mdi mdi-border-inside"></i
+                  ><span class="hide-menu">Room Table</span></a>
+              </li>
+              <li class="sidebar-item">
+                <a
+                  class="sidebar-link waves-effect waves-dark sidebar-link"
+                  href="reservationtable.php"
+                  aria-expanded="false"
+                  ><i class="mdi mdi-border-inside"></i
+                  ><span class="hide-menu">Reservation Table</span></a
+                >
               </li>
             </ul>
           </nav>
@@ -498,9 +506,9 @@
             <div class="col-12">
               <div class="card">
                 <div class="card-body">
-                  <h5 class="card-title">Room Table</h5>
+                  <h5 class="card-title">Room Type Table</h5>
                   <br>
-                  <a type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#addUser">Add Room</a>
+                  <a type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#addUser">Add Room Type</a>
                   <br><br>
                   <div class="table-responsive">
                     <table
