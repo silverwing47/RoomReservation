@@ -701,29 +701,33 @@
                       <label >Date</label>
                       <input type="text" class="form-control" placeholder="" name="date">
                     </div>
-                    <!-- <div class="form-group mb-2">
+                    <div class="form-group mb-2">
                       <label >TimeSlot</label>
-                      <select class="custom-select browser-default" name="timeslot">
+                      <select class="form-control" name="timeslot">
+                        <option value="default">---Select TimeSlot---</option>
       									<option value="0">Morning</option>
       									<option value="1">Afternoon</option>
                         <option value="2">Evening</option>
-                    </div> -->
-                    <div class="form-group mb-2">
+                      </select>
+                    </div>
+                    <!-- <div class="form-group mb-2">
                       <label >Time Slot</label>
                       <input type="text" class="form-control" placeholder="" name="timeslot">
-                    </div>
-                    <br>
-                    <!-- <div class="form-group mb-2">
-                      <label >Availability</label>
-                      <select class="custom-select browser-default" name="availability">
-      									<option value="1">Pending</option>
-      									<option value="0">Done</option>
                     </div> -->
+
                     <div class="form-group mb-2">
                       <label >Availability</label>
-                      <input type="text" class="form-control" placeholder="" name="availability">
+                      <select class="form-control" name="availability">
+                        <option value="default">---Select Availability---</option>
+      									<option value="0">Done</option>
+      									<option value="1">Pending</option>
+                      </select>
                     </div>
-                    <br>
+                    <!-- <div class="form-group mb-2">
+                      <label >Availability</label>
+                      <input type="text" class="form-control" placeholder="" name="availability">
+                    </div> -->
+
                     <div class="form-group mb-2">
                       <button type="submit" class="form-control btn btn-primary rounded submit px-3" name="btnAddReservation">Add Reservation</button>
                     </div>
