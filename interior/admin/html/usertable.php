@@ -437,10 +437,10 @@
               <li class="sidebar-item">
                 <a
                   class="sidebar-link waves-effect waves-dark sidebar-link"
-                  href="roomtable.php"
+                  href="room_table.php"
                   aria-expanded="false"
                   ><i class="mdi mdi-border-inside"></i
-                  ><span class="hide-menu">Room Reservation Table</span></a>
+                  ><span class="hide-menu">Room Table</span></a>
               </li>
               <li class="sidebar-item">
                 <a
