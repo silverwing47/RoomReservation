@@ -433,25 +433,24 @@
                   ><i class="mdi mdi-border-inside"></i
                   ><span class="hide-menu">User/Client Table</span></a
                 >
+                <li class="sidebar-item">
+                  <a
+                    class="sidebar-link waves-effect waves-dark sidebar-link"
+                    href="roomtable.php"
+                    aria-expanded="false"
+                    ><i class="mdi mdi-border-inside"></i
+                    ><span class="hide-menu">Room Reservation Table</span></a>
+                </li>
+                <li class="sidebar-item">
+                  <a
+                    class="sidebar-link waves-effect waves-dark sidebar-link"
+                    href="reservationtable.php"
+                    aria-expanded="false"
+                    ><i class="mdi mdi-border-inside"></i
+                    ><span class="hide-menu">Reservation Table(Real)</span></a
+                  >
+                </li>
               </li>
-              <li class="sidebar-item">
-                <a
-                  class="sidebar-link waves-effect waves-dark sidebar-link"
-                  href="roomtable.php"
-                  aria-expanded="false"
-                  ><i class="mdi mdi-border-inside"></i
-                  ><span class="hide-menu">Room Reservation Table</span></a>
-              </li>
-              <li class="sidebar-item">
-                <a
-                  class="sidebar-link waves-effect waves-dark sidebar-link"
-                  href="reservationtable.php"
-                  aria-expanded="false"
-                  ><i class="mdi mdi-border-inside"></i
-                  ><span class="hide-menu">Reservation Table(Real)</span></a
-                >
-              </li>
-
             </ul>
           </nav>
           <!-- End Sidebar navigation -->
@@ -499,9 +498,9 @@
             <div class="col-12">
               <div class="card">
                 <div class="card-body">
-                  <h5 class="card-title">User Table</h5>
+                  <h5 class="card-title">Reservation Table</h5>
                   <br>
-                  <a type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#addUser">Add User</a>
+                  <a type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#addReservation">Add Reservation</a>
                   <br><br>
                   <div class="table-responsive">
                     <table
@@ -510,35 +509,43 @@
                     >
                       <thead>
                         <tr>
-                          <th>Client ID</th>
-                          <th>First Name</th>
-                          <th>Last Name</th>
-                          <th>Email</th>
-                          <th>Password</th>
+                          <th>Reservation Number</th>
+                          <th>Name</th>
+                          <th>Address</th>
                           <th>Phone</th>
-                          <th>EditAccount</th>
+                          <th>Room Number</th>
+                          <th>Date</th>
+                          <th>Time Slot</th>
+                          <th>Availability</th>
+                          <th>Edit Reservation</th>
                         </tr>
                       </thead>
                       <tbody>
                         <?php
-                                            $sql = "SELECT * FROM tbl_client";
+                                            $sql = "SELECT * FROM tbl_reservation";
                                             $result = $conn->query($sql);
                                             if ($result->num_rows > 0) {
                                             // output data of each row
                                             while($row = $result->fetch_assoc()) {
-                                            echo "<tr><td>" . $row["userID"]. "</td><td>" . $row["firstname"] . "</td><td>"
-                                            . $row["lastname"]. "</td><td>" . $row["email"] . "</td>
-                                            <td>" . $row["password"] . "</td><td>" . $row["phone"] . "</td>
-                                            <td>" . "<a href='#' class='hehe'><i class='fas fa-edit' data-toggle='modal'data-target='#updateUser".$row['userID']. "'>Update
-                                            </i></a> &nbsp <a href='#' class='hehe'><i class='fas fa-trash-alt' data-toggle='modal' data-target='#deleteUser". $row['userID']. "'>Delete</i></a>". "</td>
+                                            echo "<tr>
+                                                      <td>" . $row["reserve_number"]. "</td>
+                                                      <td>" . $row["name"] . "</td>
+                                                      <td>" . $row["address"]. "</td>
+                                                      <td>" . $row["phone"] . "</td>
+                                                      <td>" . $row["room_id"] . "</td>
+                                                      <td>" . $row["date"] . "</td>
+                                                      <td>" . $row["timeslot"] . "</td>
+                                                      <td>" . $row["status"] . "</td>
+                                                      <td>" . "<a href='#' class='hehe'><i class='fas fa-edit' data-toggle='modal'data-target='#updateReservation".$row['reserve_number']. "'>Update
+                                            </i></a> &nbsp <a href='#' class='hehe'><i class='fas fa-trash-alt' data-toggle='modal' data-target='#deleteReservation". $row['reserve_number']. "'>Delete</i></a>". "</td>
                                             </tr>";
 
-                                            $sql2 = "SELECT * FROM tbl_client WHERE userID = ' ".$row['userID']." ' ";
+                                            $sql2 = "SELECT * FROM tbl_reservation WHERE reserve_number = ' ".$row['reserve_number']." ' ";
                                             $result2 = mysqli_query($conn,$sql2);
                                             $row2=mysqli_fetch_assoc($result2);
-                                            $user = $row['userID'];
+                                            $reserve = $row['reserve_number'];
 
-                                            echo "<div id='updateUser".$row['userID']."' class='modal fade' role='dialog'>
+                                            echo "<div id='updateReservation".$row['reserve_number']."' class='modal fade' role='dialog'>
 
                                             <div class='modal-dialog'>
 
@@ -554,30 +561,38 @@
                                                     <h3 class='text-center mb-3'>Update User</h3>
                                                     <br>
                                                     <form class='signup-form'  method='POST'>
-                                                        <input type='text' class='form-control' value='". $row2["userID"] ."' name='user_ID' hidden>
+                                                        <input type='text' class='form-control' value='". $row2["reserve_number"] ."' name='reserve_Number' hidden>
                                                       <div class='form-group mb-2'>
-                                                        <label for='name'>First Name</label>
-                                                        <input type='text' class='form-control' value='". $row2["firstname"] ."' name='fName'>
+                                                        <label for='name'>Name</label>
+                                                        <input type='text' class='form-control' value='". $row2["name"] ."' name='Name'>
                                                       </div>
                                                       <div class='form-group mb-2'>
-                                                        <label for='name'>Last Name</label>
-                                                        <input type='text' class='form-control' value='". $row2["lastname"] ."' name='lName'>
+                                                        <label for='name'>Address</label>
+                                                        <input type='text' class='form-control' value='". $row2["address"] ."' name='Address'>
                                                       </div>
                                                       <div class='form-group mb-2'>
-                                                        <label for='email'>Email</label>
-                                                        <input type='text' class='form-control' value='". $row2["email"] ."' name='Email' >
+                                                        <label for='email'>Phone</label>
+                                                        <input type='text' class='form-control' value='". $row2["phone"] ."' name='Phone' >
                                                       </div>
                                                       <div class='form-group mb-2'>
-                                                        <label >Password</label>
-                                                        <input type='text' class='form-control' value='". $row2["password"] ."' name='Password'>
+                                                        <label >Rood ID</label>
+                                                        <input type='text' class='form-control' value='". $row2["room_id"] ."' name='Room_id'>
                                                       </div>
                                                       <div class='form-group mb-2'>
-                                                        <label >Phone</label>
-                                                        <input type='text' class='form-control' value='". $row2["phone"] ."' name='Phone'>
+                                                        <label >Date</label>
+                                                        <input type='text' class='form-control' value='". $row2["date"] ."' name='Date'>
+                                                      </div>
+                                                      <div class='form-group mb-2'>
+                                                        <label >Timeslot</label>
+                                                        <input type='text' class='form-control' value='". $row2["timeslot"] ."' name='Timeslot'>
+                                                      </div>
+                                                      <div class='form-group mb-2'>
+                                                        <label >Availability</label>
+                                                        <input type='text' class='form-control' value='". $row2["status"] ."' name='Availability'>
                                                       </div>
                                                       <br>
                                                       <div class='form-group mb-2'>
-                                                        <button type='submit' class='form-control btn btn-primary rounded submit px-3' name='btnUpdateUser'>Upate User</button>
+                                                        <button type='submit' class='form-control btn btn-primary rounded submit px-3' name='btnupdateReservation'>Upate Reservation</button>
                                                       </div>
 
 
@@ -594,7 +609,7 @@
                                             </div>
                                           </div>";
 
-                                          echo "<div id='deleteUser".$row['userID']."' class='modal fade' role='dialog'>
+                                          echo "<div id='deleteReservation".$row['reserve_number']."' class='modal fade' role='dialog'>
 
                                           <div class='modal-dialog'>
 
@@ -608,12 +623,13 @@
                                                   <h3 class='text-center mb-3'>Delete User</h3>
                                                   <br>
                                                   <form class='signup-form'  method='POST'>
-                                                      <input type='text' class='form-control' value=' ". $row2["userID"] ." ' name='deluserID' hidden>
+                                                      <input type='text' class='form-control' value=' ". $row2["reserve_number"] ." ' name='delreserveNum' hidden>
                                                     <br>
-                                                      <input type='text' class='form-control' value=' ". $row2["firstname"] ." " . $row2["lastname"] ." ' name='user_Name' readonly>
-                                                    <p> Do you want to delete this User? </p>
+                                                      <p> Do you want to delete Reservation for: </p>
+                                                      <input type='text' class='form-control' value=' ". $row2["name"] ." ' name='clientName' readonly>
+                                                    <br>
                                                     <div class='form-group mb-2'>
-                                                      <button type='submit' class='form-control btn btn-primary rounded submit px-3' name='btnDeleteUser'>Delete User</button>
+                                                      <button type='submit' class='form-control btn btn-primary rounded submit px-3' name='btnDeleteReservation'>Delete Reservation</button>
                                                     </div>
                                                   </form>
                                                 </div>
@@ -653,7 +669,7 @@
           <!-- ============================================================== -->
 
           <!-- Modal Add User -->
-          <div class="modal fade" id="addUser" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+          <div class="modal fade" id="addReservation" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
               <div class="modal-content">
                 <div class="modal-header">
@@ -662,32 +678,54 @@
                   </button>
                 </div>
                 <div class="modal-body p-4 py-5 p-md-5">
-                  <h3 class="text-center mb-3">Add New User</h3>
+                  <h3 class="text-center mb-3">Add New Reservation</h3>
                   <br>
                   <form action="#" class="signup-form"  method="POST">
                     <div class="form-group mb-2">
-                      <label for="name">First Name</label>
-                      <input type="text" class="form-control" placeholder="" name="fname">
+                      <label for="name">Name</label>
+                      <input type="text" class="form-control" placeholder="" name="name">
                     </div>
                     <div class="form-group mb-2">
-                      <label for="name">Last Name</label>
-                      <input type="text" class="form-control" placeholder="" name="lname">
+                      <label for="address">Address</label>
+                      <input type="text" class="form-control" placeholder="" name="address">
                     </div>
                     <div class="form-group mb-2">
-                      <label for="email">Email</label>
-                      <input type="text" class="form-control" placeholder="" name="email">
-                    </div>
-                    <div class="form-group mb-2">
-                      <label >Password</label>
-                      <input type="password" class="form-control" placeholder="" name="password">
-                    </div>
-                    <div class="form-group mb-2">
-                      <label >Phone</label>
+                      <label for="phone">Phone</label>
                       <input type="text" class="form-control" placeholder="" name="phone">
+                    </div>
+                    <div class="form-group mb-2">
+                      <label >Room Number</label>
+                      <input type="text" class="form-control" placeholder="" name="roomNumber">
+                    </div>
+                    <div class="form-group mb-2">
+                      <label >Date</label>
+                      <input type="text" class="form-control" placeholder="" name="date">
+                    </div>
+                    <!-- <div class="form-group mb-2">
+                      <label >TimeSlot</label>
+                      <select class="custom-select browser-default" name="timeslot">
+      									<option value="0">Morning</option>
+      									<option value="1">Afternoon</option>
+                        <option value="2">Evening</option>
+                    </div> -->
+                    <div class="form-group mb-2">
+                      <label >Time Slot</label>
+                      <input type="text" class="form-control" placeholder="" name="timeslot">
+                    </div>
+                    <br>
+                    <!-- <div class="form-group mb-2">
+                      <label >Availability</label>
+                      <select class="custom-select browser-default" name="availability">
+      									<option value="1">Pending</option>
+      									<option value="0">Done</option>
+                    </div> -->
+                    <div class="form-group mb-2">
+                      <label >Availability</label>
+                      <input type="text" class="form-control" placeholder="" name="availability">
                     </div>
                     <br>
                     <div class="form-group mb-2">
-                      <button type="submit" class="form-control btn btn-primary rounded submit px-3" name="btnAddUser">Add User</button>
+                      <button type="submit" class="form-control btn btn-primary rounded submit px-3" name="btnAddReservation">Add Reservation</button>
                     </div>
 
                   </form>
@@ -763,16 +801,18 @@
   </body>
 
   <?php
-    if(isset($_POST['btnAddUser'])){
-        $fname=$_POST['fname'];
-        $lname=$_POST['lname'];
-        $email=$_POST['email'];
-        $pwd=$_POST['password'];
+    if(isset($_POST['btnAddReservation'])){
+        $name=$_POST['name'];
+        $address=$_POST['address'];
         $phone=$_POST['phone'];
+        $rNum=$_POST['roomNumber'];
+        $date=$_POST['date'];
+        $timeslot=$_POST['timeslot'];
+        $avail=$_POST['availability'];
         // $query="INSERT INTO usertbl (firstName, lastName, email, password, phone) VALUES ('$fname','$lname', '$email',SHA('$pwd'), '$phone')"; //for encryption of password utilize SHA()
-        $query="INSERT INTO tbl_client (firstname, lastname, email, password, phone) VALUES ('$fname','$lname', '$email','$pwd', '$phone')";
+        $query="INSERT INTO tbl_reservation (name, address, phone, room_id, date, timeslot, status) VALUES ('$name','$address', '$phone','$rNum', '$date', '$timeslot', '$avail')";
         mysqli_query($conn,$query);
-        header("Location: usertable.php");
+        header("Location: reservationtable.php");
         // $count = mysqli_num_rows($result);
         // if($count ==0)
         //   echo "<script language='javascript'> alert('Incorrect username or password');</script>";
@@ -782,25 +822,25 @@
         //   header("Location: ../index.php");
         // }
     }
-  if(isset($_POST['btnUpdateUser'])){
+    if(isset($_POST['btnupdateReservation'])){
 
-        $fName=$_POST['fName'];
-        $user=$_POST['user_ID'];
-        $lName=$_POST['lName'];
-        $Email=$_POST['Email'];
-        $Pwd=$_POST['Password'];
-        $Phone=$_POST['Phone'];
+          $reserve=$_POST['reserve_Number'];
+          $Name=$_POST['Name'];
+          $Address=$_POST['Address'];
+          $Phone=$_POST['Phone'];
+          $RNum=$_POST['Room_id'];
+          $Date=$_POST['Date'];
+          $Timeslot=$_POST['Timeslot'];
+          $Avail=$_POST['Availability'];
 
-        $sql3 = mysqli_query($conn,"UPDATE tbl_client set firstname='$fName',lastname='$lName',email='$Email',password='$Pwd',phone='$Phone' where userID = $user");
-        header("Location: usertable.php");
-
-    }
-    if(isset($_POST['btnDeleteUser'])){
-            $deluser=$_POST['deluserID'];
-            $sql4 = mysqli_query($conn,"DELETE FROM tbl_client WHERE userID = $deluser");
-            header("Location: usertable.php");
-
+          $sql3 = mysqli_query($conn,"UPDATE tbl_reservation set name='$Name',address='$Address',phone='$Phone',room_id='$RNum',date='$Date',timeslot='$Timeslot',status='$Avail' where reserve_number = $reserve");
+          header("Location: reservationtable.php");
       }
-      ?>
+      if(isset($_POST['btnDeleteReservation'])){
+          $delreserve=$_POST['delreserveNum'];
+          $sql4 = mysqli_query($conn,"DELETE FROM tbl_reservation WHERE reserve_number = $delreserve");
+          header("Location: reservationtable.php");
+      }
+  ?>
 
 </html>
