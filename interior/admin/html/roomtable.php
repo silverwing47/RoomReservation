@@ -433,16 +433,15 @@
                   ><i class="mdi mdi-border-inside"></i
                   ><span class="hide-menu">User/Client Table</span></a
                 >
+                <li class="sidebar-item">
+                  <a
+                    class="sidebar-link waves-effect waves-dark sidebar-link"
+                    href="roomtable.php"
+                    aria-expanded="false"
+                    ><i class="mdi mdi-border-inside"></i
+                    ><span class="hide-menu">Room Reservation Table</span></a>
+                </li>
               </li>
-              <li class="sidebar-item">
-                <a
-                  class="sidebar-link waves-effect waves-dark sidebar-link"
-                  href="roomtable.php"
-                  aria-expanded="false"
-                  ><i class="mdi mdi-border-inside"></i
-                  ><span class="hide-menu">Room Reservation Table</span></a>
-              </li>
-
             </ul>
           </nav>
           <!-- End Sidebar navigation -->
@@ -490,9 +489,9 @@
             <div class="col-12">
               <div class="card">
                 <div class="card-body">
-                  <h5 class="card-title">User Table</h5>
+                  <h5 class="card-title">Room Table</h5>
                   <br>
-                  <a type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#addUser">Add User</a>
+                  <a type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#addRoom">Add Room</a>
                   <br><br>
                   <div class="table-responsive">
                     <table
@@ -501,13 +500,13 @@
                     >
                       <thead>
                         <tr>
-                          <th>Client ID</th>
-                          <th>First Name</th>
-                          <th>Last Name</th>
-                          <th>Email</th>
-                          <th>Password</th>
-                          <th>Phone</th>
-                          <th>EditAccount</th>
+                          <th>Reservation ID</th>
+                          <th>Name</th>
+                          <th>Address</th>
+                          <th>Room Number</th>
+                          <th>Date</th>
+                          <th>Time Slot</th>
+                          <th>Edit Reservation</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -754,44 +753,44 @@
   </body>
 
   <?php
-    if(isset($_POST['btnAddUser'])){
-        $fname=$_POST['fname'];
-        $lname=$_POST['lname'];
-        $email=$_POST['email'];
-        $pwd=$_POST['password'];
-        $phone=$_POST['phone'];
-        // $query="INSERT INTO usertbl (firstName, lastName, email, password, phone) VALUES ('$fname','$lname', '$email',SHA('$pwd'), '$phone')"; //for encryption of password utilize SHA()
-        $query="INSERT INTO tbl_client (firstname, lastname, email, password, phone) VALUES ('$fname','$lname', '$email','$pwd', '$phone')";
-        mysqli_query($conn,$query);
-        header("Location: usertable.php");
-        // $count = mysqli_num_rows($result);
-        // if($count ==0)
-        //   echo "<script language='javascript'> alert('Incorrect username or password');</script>";
-        // else{
-        //   $row=mysqli_fetch_assoc($result);
-        //   $_SESSION['login']=$row['email'];
-        //   header("Location: ../index.php");
-        // }
-    }
-  if(isset($_POST['btnUpdateUser'])){
-
-        $fName=$_POST['fName'];
-        $user=$_POST['user_ID'];
-        $lName=$_POST['lName'];
-        $Email=$_POST['Email'];
-        $Pwd=$_POST['Password'];
-        $Phone=$_POST['Phone'];
-
-        $sql3 = mysqli_query($conn,"UPDATE tbl_client set firstname='$fName',lastname='$lName',email='$Email',password='$Pwd',phone='$Phone' where userID = $user");
-        header("Location: usertable.php");
-
-    }
-    if(isset($_POST['btnDeleteUser'])){
-            $deluser=$_POST['deluserID'];
-            $sql4 = mysqli_query($conn,"DELETE FROM tbl_client WHERE userID = $deluser");
-            header("Location: usertable.php");
-
-      }
-      ?>
+  //   if(isset($_POST['btnAddUser'])){
+  //       $fname=$_POST['fname'];
+  //       $lname=$_POST['lname'];
+  //       $email=$_POST['email'];
+  //       $pwd=$_POST['password'];
+  //       $phone=$_POST['phone'];
+  //       // $query="INSERT INTO usertbl (firstName, lastName, email, password, phone) VALUES ('$fname','$lname', '$email',SHA('$pwd'), '$phone')"; //for encryption of password utilize SHA()
+  //       $query="INSERT INTO tbl_client (firstname, lastname, email, password, phone) VALUES ('$fname','$lname', '$email','$pwd', '$phone')";
+  //       mysqli_query($conn,$query);
+  //       header("Location: usertable.php");
+  //       // $count = mysqli_num_rows($result);
+  //       // if($count ==0)
+  //       //   echo "<script language='javascript'> alert('Incorrect username or password');</script>";
+  //       // else{
+  //       //   $row=mysqli_fetch_assoc($result);
+  //       //   $_SESSION['login']=$row['email'];
+  //       //   header("Location: ../index.php");
+  //       // }
+  //   }
+  // if(isset($_POST['btnUpdateUser'])){
+  //
+  //       $fName=$_POST['fName'];
+  //       $user=$_POST['user_ID'];
+  //       $lName=$_POST['lName'];
+  //       $Email=$_POST['Email'];
+  //       $Pwd=$_POST['Password'];
+  //       $Phone=$_POST['Phone'];
+  //
+  //       $sql3 = mysqli_query($conn,"UPDATE tbl_client set firstname='$fName',lastname='$lName',email='$Email',password='$Pwd',phone='$Phone' where userID = $user");
+  //       header("Location: usertable.php");
+  //
+  //   }
+  //   if(isset($_POST['btnDeleteUser'])){
+  //           $deluser=$_POST['deluserID'];
+  //           $sql4 = mysqli_query($conn,"DELETE FROM tbl_client WHERE userID = $deluser");
+  //           header("Location: usertable.php");
+  //
+  //     }
+  //     ?>
 
 </html>
