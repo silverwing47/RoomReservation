@@ -1,3 +1,11 @@
+<?php
+  ob_start();
+  $conn =mysqli_connect("localhost","root","","db_resrv");
+  if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+  }
+?>
+
 <!DOCTYPE html>
 <html dir="ltr">
   <head>
@@ -64,7 +72,7 @@
           <form
             class="form-horizontal mt-3"
             id="loginform"
-            action="index.html"
+            action="" method="POST"
           >
             <div class="row pb-4">
               <div class="col-12">
@@ -83,6 +91,7 @@
                     aria-label="Username"
                     aria-describedby="basic-addon1"
                     required=""
+                    name = "logUser"
                   />
                 </div>
                 <div class="input-group mb-3">
@@ -100,6 +109,7 @@
                     aria-label="Password"
                     aria-describedby="basic-addon1"
                     required=""
+                    name = "logPass"
                   />
                 </div>
               </div>
@@ -110,12 +120,13 @@
                   <div class="pt-3">
                     <a href="../index.html"><button class="btn btn-info" id="to-recover" type="button">Return Home</button></a>
 
-                    <a href="index.html"
+                    <!-- <a href="index.html"
                       class="btn btn-success float-end text-white"
                       type="submit"
                     >
                       Login
-                    </a>
+                    </a> -->
+                    <input class="btn btn-success float-end text-white" type="submit" value="Login" name="btnLogin">
                   </div>
                 </div>
               </div>
@@ -167,5 +178,28 @@
 
     <!--====== Main js ======-->
     <script src="assets/js/main.js"></script>
+
+    <?php
+      $con =mysqli_connect("localhost","root","","db_resrv");
+      $err="";
+      if($con){
+        if(isset($_POST['btnLogin'])){
+          $username=$_POST['logUser'];
+            $pwd=$_POST['logPass'];
+            $query="select * from tbl_admin where username='$username' and password='$pwd'";
+            $result = mysqli_query($con,$query);
+            $count = mysqli_num_rows($result);
+            if($count ==0)
+              echo "<script language='javascript'> alert('Incorrect username or password');</script>";
+            else{
+              $row=mysqli_fetch_assoc($result);
+              $_SESSION['login']=$row['username'];
+              header("Location: index.html");
+            }
+        }
+        }
+
+     ?>
+
   </body>
 </html>
