@@ -547,28 +547,36 @@
                                                     <form class='signup-form'  method='POST'>
                                                         <input type='text' class='form-control' value='". $row2["id"] ."' name='id' hidden>
                                                       <div class='form-group mb-2'>
-                                                        <label for='name'>First Name</label>
+                                                        <label for='name'>Room Number</label>
                                                         <input type='text' class='form-control' value='". $row2["roomNumber"] ."' name='roomNumber'>
                                                       </div>
                                                       <div class='form-group mb-2'>
-                                                        <label for='name'>Last Name</label>
+                                                        <label for='name'>Type ID</label>
                                                         <input type='text' class='form-control' value='". $row2["type_id"] ."' name='type_id'>
                                                       </div>
                                                       <div class='form-group mb-2'>
-                                                        <label for='email'>Email</label>
-                                                        <input type='text' class='form-control' value='". $row2["status_morning"] ."' name='status_morning' >
+                                                        <label >Status (Morning) 1-Available 0-Booked</label>
                                                         <select name='status_morning' class='form-control'>
+                                                          <option selected hidden value='". $row2["status_morning"] ."'>Current Status (". $row2["status_morning"] .")</option>
                                                           <option value='0'>0</option>
                                                           <option value='1'>1</option>
                                                         </select>
                                                       </div>
                                                       <div class='form-group mb-2'>
-                                                        <label >Password</label>
-                                                        <input type='text' class='form-control' value='". $row2["status_afternoon"] ."' name='status_afternoon'>
+                                                        <label >Status (Afternoon) 1-Available 0-Booked</label>
+                                                        <select name='status_afternoon' class='form-control'>
+                                                          <option selected hidden value='". $row2["status_afternoon"] ."'>Current Status (". $row2["status_afternoon"] .")</option>
+                                                          <option value='0'>0</option>
+                                                          <option value='1'>1</option>
+                                                        </select>
                                                       </div>
                                                       <div class='form-group mb-2'>
-                                                        <label >Phone</label>
-                                                        <input type='text' class='form-control' value='". $row2["status_evening"] ."' name='status_evening'>
+                                                        <label >Status (Evening) 1-Available 0-Booked</label>
+                                                        <select name='status_evening' class='form-control'>
+                                                          <option selected hidden value='". $row2["status_evening"] ."'>Current Status (". $row2["status_evening"] .")</option>
+                                                          <option value='0'>0</option>
+                                                          <option value='1'>1</option>
+                                                        </select>
                                                       </div>
                                                       <br>
                                                       <div class='form-group mb-2'>
