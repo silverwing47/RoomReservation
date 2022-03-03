@@ -557,7 +557,7 @@
 
 
                                                   <div class='modal-body p-4 py-5 p-md-5'>
-                                                    <h3 class='text-center mb-3'>Update User</h3>
+                                                    <h3 class='text-center mb-3'>Update Room Type</h3>
                                                     <br>
                                                     <form class='signup-form'  method='POST'>
                                                         <input type='text' class='form-control' value='". $row2["id"] ."' name='id' hidden>
@@ -580,7 +580,7 @@
 
                                                       <br>
                                                       <div class='form-group mb-2'>
-                                                        <button type='submit' class='form-control btn btn-primary rounded submit px-3' name='btnUpdateUser'>Upate User</button>
+                                                        <button type='submit' class='form-control btn btn-primary rounded submit px-3' name='btnUpdateUser'>Upate Room Type</button>
                                                       </div>
 
 
@@ -608,7 +608,7 @@
                                               </div>
                                               <div class='modal-body'>
                                                 <div class='modal-body p-4 py-5 p-md-5'>
-                                                  <h3 class='text-center mb-3'>Delete User</h3>
+                                                  <h3 class='text-center mb-3'>Delete Room Type</h3>
                                                   <br>
                                                   <form class='signup-form'  method='POST'>
                                                         <input type='text' class='form-control' value=' ". $row2["id"] ." ' name='deluserID' hidden>
@@ -616,7 +616,7 @@
                                                       <input type='text' class='form-control' value=' ". $row2["type"] ." " . $row2["price_morning"] ." " . $row2["price_afternoon"] ." " . $row2["price_evening"] ." ' name='user_Name' readonly>
                                                     <p> Do you want to delete this User? </p>
                                                     <div class='form-group mb-2'>
-                                                      <button type='submit' class='form-control btn btn-primary rounded submit px-3' name='btnDeleteUser'>Delete User</button>
+                                                      <button type='submit' class='form-control btn btn-primary rounded submit px-3' name='btnDeleteUser'>Delete Room Type</button>
                                                     </div>
                                                   </form>
                                                 </div>
@@ -665,7 +665,7 @@
                   </button>
                 </div>
                 <div class="modal-body p-4 py-5 p-md-5">
-                  <h3 class="text-center mb-3">Add New User</h3>
+                  <h3 class="text-center mb-3">New Room Type</h3>
                   <br>
                   <form action="#" class="signup-form"  method="POST">
                     <div class="form-group mb-2">
@@ -687,7 +687,7 @@
 
                     <br>
                     <div class="form-group mb-2">
-                      <button type="submit" class="form-control btn btn-primary rounded submit px-3" name="btnAddUser">Add User</button>
+                      <button type="submit" class="form-control btn btn-primary rounded submit px-3" name="btnAddRoomType">Add Room Type</button>
                     </div>
 
                   </form>
@@ -770,7 +770,7 @@
       $price_evening=$_POST['price_evening'];
 
       // $query="INSERT INTO usertbl (firstName, lastName, email, password, phone) VALUES ('$fname','$lname', '$email',SHA('$pwd'), '$phone')"; //for encryption of password utilize SHA()
-      $query="INSERT INTO tbl_roomtype (type, price_morning, price_afternoon, price_evening, ) VALUES ('$type','$price_morning', '$price_afternoon','$price_evening')";
+      $query="INSERT INTO tbl_roomtype (type, price_morning, price_afternoon, price_evening) VALUES ('$type','$price_morning', '$price_afternoon','$price_evening')";
       mysqli_query($conn,$query);
       header("Location: roomtype.php");
       // $count = mysqli_num_rows($result);
