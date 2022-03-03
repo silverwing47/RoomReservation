@@ -557,6 +557,10 @@
                                                       <div class='form-group mb-2'>
                                                         <label for='email'>Email</label>
                                                         <input type='text' class='form-control' value='". $row2["status_morning"] ."' name='status_morning' >
+                                                        <select name='status_morning' class='form-control'>
+                                                          <option value='0'>0</option>
+                                                          <option value='1'>1</option>
+                                                        </select>
                                                       </div>
                                                       <div class='form-group mb-2'>
                                                         <label >Password</label>
@@ -663,12 +667,18 @@
                       </select>
                     </div>
                     <div class="form-group mb-2">
-                      <label >Status (Afternoon)</label>
-                      <input type="password" class="form-control" placeholder="" name="status_afternoon">
+                      <label >Status (Afternoon) 1-Available 0-Booked</label>
+                      <select name="status_afternoon" class="form-control">
+                        <option value="0">0</option>
+                        <option value="1">1</option>
+                      </select>
                     </div>
                     <div class="form-group mb-2">
-                      <label >Status (Evening)</label>
-                      <input type="text" class="form-control" placeholder="" name="status_evening">
+                      <label >Status (Evening) 1-Available 0-Booked</label>
+                      <select name="status_evening" class="form-control">
+                        <option value="0">0</option>
+                        <option value="1">1</option>
+                      </select>
                     </div>
                     <br>
                     <div class="form-group mb-2">
