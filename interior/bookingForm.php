@@ -1,9 +1,19 @@
+<?php
+  ob_start();
+  $conn =mysqli_connect("localhost","root","","db_resrv");
+  if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+  }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  	<title>Bootstrap Table Reservation Form Template Design</title>
+  	<title>Re.Srv User Transaction</title>
   	<meta charset="utf-8">
   	<meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Logo -->
+    <link rel="shortcut icon" href="assets/images/favico.png" type="image/png">
     <!-- Bootstrap CSS -->
   	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
     <!-- Bootstrap JS -->
@@ -36,8 +46,8 @@
         <div class="container" data-aos="fade-up">
             <div class="row">
     			<div class="col-md-8 offset-md-2 text-center">
-    				<h2 class="text-primary">Book A Table</h2>
-    				<p class="mb-5">Bootstrap table reservation form template design is created by using bootstrap where users can book online restaurant tables, food orders according to yourself.</p>
+    				<h2 class="text-primary">Re.Srv A Conference Room Now!!</h2>
+    				<p class="mb-5">Select the room you want for your meetings/conferences. Re.Srv Now!</p>
     			</div>
     		</div>
 
@@ -65,10 +75,11 @@
               <div class="form-group">
                     <textarea class="form-control" name="message" placeholder="Message"></textarea>
               </div>
-              <button type="submit" class="btn btn-primary float-right mt-3">Book a Table</button>
+              <button type="submit" class="btn btn-primary float-right mt-3" name="btnReserve">Reserve Now</button>
             </form>
         </div>
     </section>
     <!-- End Table Reservation Form -->
+    
 </body>
 </html>

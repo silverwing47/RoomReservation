@@ -1,3 +1,11 @@
+<?php
+  ob_start();
+  $conn =mysqli_connect("localhost","root","","db_resrv");
+  if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+  }
+?>
+
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
@@ -119,7 +127,7 @@
             else{
               $row=mysqli_fetch_assoc($result);
               $_SESSION['login']=$row['email'];
-              header("Location: ../indexx.php");
+              header("Location: bookingForm.php");
             }
         }
 
