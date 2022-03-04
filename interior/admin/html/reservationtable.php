@@ -524,7 +524,7 @@
                           <th>Room Number</th>
                           <th>Date</th>
                           <th>Time Slot</th>
-                          <th>Availability</th>
+                          <th>Availability (0=Done;1=Pending)</th>
                           <th>Edit Reservation</th>
                         </tr>
                       </thead>
@@ -588,18 +588,23 @@
                                                       </div>
                                                       <div class='form-group mb-2'>
                                                         <label >Date</label>
-                                                        <input type='text' class='form-control' value='". $row2["date"] ."' name='Date'>
+                                                        <input type='date' class='form-control' value='". $row2["date"] ."' name='Date'>
                                                       </div>
                                                       <div class='form-group mb-2'>
                                                         <label >Timeslot</label>
                                                         <select class='form-control' name='Timeslot'>
-                                                          <option value='". $row2["timeslot"] ."'>". $row2["timeslot"] ."</option>
+                                                          <option selected hidden value='". $row2["timeslot"] ."'>". $row2["timeslot"] ."</option>
+                                                          <option value='Morning'>Morning</option>
+                                        									<option value='Afternoon'>Afternoon</option>
+                                                          <option value='Evening'>Evening</option>
                                                         </select>
                                                       </div>
                                                       <div class='form-group mb-2'>
                                                         <label >Availability</label>
                                                         <select class='form-control' name='Availability'>
-                                                          <option value='". $row2["status"] ."'>". $row2["status"] ."</option>
+                                                          <option selected hidden value='". $row2["status"] ."'>". $row2["status"] ."</option>
+                                                          <option value='0'>Done</option>
+                                        									<option value='1'>Pending</option>
                                                         </select>
                                                       </div>
                                                       <br>
@@ -711,15 +716,15 @@
                     </div>
                     <div class="form-group mb-2">
                       <label >Date</label>
-                      <input type="text" class="form-control" placeholder="" name="date">
+                      <input type="date" class="form-control" placeholder="" name="date">
                     </div>
                     <div class="form-group mb-2">
                       <label >TimeSlot</label>
                       <select class="form-control" name="timeslot">
-                        <option value="default">---Select TimeSlot---</option>
-      									<option value="0">Morning</option>
-      									<option value="1">Afternoon</option>
-                        <option value="2">Evening</option>
+                        <option hidden value="default">---Select TimeSlot---</option>
+      									<option value="Morning">Morning</option>
+      									<option value="Afternoon">Afternoon</option>
+                        <option value="Evening">Evening</option>
                       </select>
                     </div>
                     <!-- <div class="form-group mb-2">
@@ -730,9 +735,9 @@
                     <div class="form-group mb-2">
                       <label >Availability</label>
                       <select class="form-control" name="availability">
-                        <option value="default">---Select Availability---</option>
-      									<option value="0">Done</option>
-      									<option value="1">Pending</option>
+                        <option hidden value="default">---Select Availability---</option>
+      									<option value="Done">Done</option>
+      									<option value="Pending">Pending</option>
                       </select>
                     </div>
                     <!-- <div class="form-group mb-2">
