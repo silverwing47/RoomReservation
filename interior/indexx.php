@@ -147,7 +147,7 @@
                                   <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                       <li><a type="button" class="dropdown-item" data-toggle='modal' data-target='#updateUser'>Edit Account</a></li>
                                       <!-- <li><a class="dropdown-item" href="#">View my bookings</a></li> -->
-                                      <li><a class="dropdown-item" href="#">Logout</a></li>
+                                      <li><a class="dropdown-item" href="index.html">Logout</a></li>
                                   </ul>
                               </div>
                             </div>
