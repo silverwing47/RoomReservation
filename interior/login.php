@@ -4,6 +4,8 @@
   if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
   }
+
+  session_start();
 ?>
 
 <!DOCTYPE html>
@@ -127,7 +129,7 @@
             else{
               $row=mysqli_fetch_assoc($result);
               $_SESSION['login']=$row['email'];
-              header("Location: bookingForm.php");
+              header("Location: indexx.php");
             }
         }
 
