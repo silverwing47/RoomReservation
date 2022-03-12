@@ -23,6 +23,11 @@
 
     <!--====== Title ======-->
     <title>Re.Srv Homepage</title>
+    <!-- modal -->
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
+    <link rel="stylesheet" href="admin/modal/css/ionicons.min.css">
+    <link rel="stylesheet" href="admin/modal/css/style.css">
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" /> -->
 
     <!--====== Favicon Icon ======-->
     <link rel="shortcut icon" href="assets/images/favico.png" type="image/png">
@@ -51,6 +56,9 @@
     <!--====== Style css ======-->
     <link rel="stylesheet" href="assets/css/mystyle.css">
     <link rel="stylesheet" href="assets/css/dropdown.css">
+
+    <!-- modal -->
+
 
 </head>
 
@@ -137,10 +145,9 @@
                                 <!-- <a class="main-btn" type="button" href="login.php"><?php echo $loggedUser; ?></a> -->
                               <div class="dropdown"> <button class="btn btn-outline-danger dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-expanded="false" style" text-align: center;"> <span>My Account</span> <i class="fa fa-caret-down"></i> </button>
                                   <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                      <li><a class="dropdown-item" href="#">Edit Account</a></li>
+                                      <li><a type="button" class="dropdown-item" data-toggle='modal' data-target='#updateUser'>Edit Account</a></li>
                                       <!-- <li><a class="dropdown-item" href="#">View my bookings</a></li> -->
                                       <li><a class="dropdown-item" href="#">Logout</a></li>
-
                                   </ul>
                               </div>
                             </div>
@@ -710,6 +717,61 @@
         </div> <!-- copyright-area -->
     </footer>
 
+  <?php
+    $sql = "SELECT * FROM tbl_client WHERE email = '$loggedUser' ";
+    $result = mysqli_query($conn,$sql);
+    $row=mysqli_fetch_assoc($result);
+    // $user = $row2['email'];
+
+    echo "<div id='updateUser' class='modal fade'tabindex='-1' role='dialog' aria-labelledby='exampleModalCenterTitle' aria-hidden='true' >
+      <div class='modal-dialog'>
+        <div class='modal-content'>
+          <div class='modal-header'>
+
+          </div>
+          <div class='modal-body'>
+
+
+            <div class='modal-body p-4 py-5 p-md-5'>
+              <h3 class='text-center mb-3'>Edit Account</h3>
+              <br>
+              <form class='signup-form'  method='POST'>
+                  <input type='text' class='form-control' value='". $row["userID"] ."' name='user_ID' hidden>
+                <div class='form-group mb-2'>
+                  <label for='name'>First Name</label>
+                  <input type='text' class='form-control' value='". $row["firstname"] ."' name='fName'>
+                </div>
+                <div class='form-group mb-2'>
+                  <label for='name'>Last Name</label>
+                  <input type='text' class='form-control' value='". $row["lastname"] ."' name='lName'>
+                </div>
+                <div class='form-group mb-2'>
+                  <label for='email'>Email</label>
+                  <input type='text' class='form-control' value='". $row["email"] ."' name='Email' >
+                </div>
+                <div class='form-group mb-2'>
+                  <label >Password</label>
+                  <input type='text' class='form-control' value='". $row["password"] ."' name='Password'>
+                </div>
+                <div class='form-group mb-2'>
+                  <label >Phone</label>
+                  <input type='text' class='form-control' value='". $row["phone"] ."' name='Phone'>
+                </div>
+                <br>
+                <div class='form-group mb-2'>
+                  <button type='submit' class='form-control btn btn-primary rounded submit px-3' name='btnUpdateUser'>Upate User</button>
+                </div>
+              </form>
+            </div>
+          </div>
+          <div class='modal-footer'>
+            <button type='button' class='btn btn-default' data-dismiss='modal'>Close</button>
+          </div>
+        </div>
+      </div>
+    </div>";
+  ?>
+
     <!--====== FOOTER PART ENDS ======-->
 
     <!--====== BACK TO TOP PART START ======-->
@@ -717,14 +779,18 @@
     <a href="#" class="back-to-top"><i class="lni-chevron-up"></i></a>
 
     <!--====== BACK TO TOP PART ENDS ======-->
-
+    <!-- modal -->
+    <script src="admin/modal/js/jquery.min.js"></script>
+    <script src="admin/modal/js/popper.js"></script>
+    <script src="admin/modal/js/bootstrap.min.js"></script>
+    <script src="admin/modal/js/main.js"></script>
 
     <!--====== jquery js ======-->
     <script src="assets/js/vendor/modernizr-3.6.0.min.js"></script>
     <script src="assets/js/vendor/jquery-1.12.4.min.js"></script>
 
     <!--====== Bootstrap js ======-->
-    <script src="assets/js/bootstrap.min.js"></script>
+    <!-- <script src="assets/js/bootstrap.min.js"></script> -->
 
     <!--====== WOW js ======-->
     <script src="assets/js/wow.min.js"></script>
@@ -746,3 +812,21 @@
 </body>
 
 </html>
+
+<?php
+
+  if(isset($_POST['btnUpdateUser'])){
+
+        $fName=$_POST['fName'];
+        $user=$_POST['user_ID'];
+        $lName=$_POST['lName'];
+        $Email=$_POST['Email'];
+        $Pwd=$_POST['Password'];
+        $Phone=$_POST['Phone'];
+
+        $sql3 = mysqli_query($conn,"UPDATE tbl_client set firstname='$fName',lastname='$lName',email='$Email',password='$Pwd',phone='$Phone' where userID = $user");
+        $_SESSION['login']=$Email;
+        header("Location: indexx.php");
+
+    }
+  ?>

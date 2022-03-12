@@ -22,7 +22,7 @@
 
 .dropdown-menu {
     width: 200px;
-    border: 2px solid #368535;
+    /* border: 2px solid #368535; */
     padding: 0rem 0;
     /* transform: translate3d(0px, 50px, 0px) !important */
 }
@@ -30,7 +30,7 @@
 .dropdown-item:focus,
 .dropdown-item:hover {
     color: #ffffff;
-    background-color: #dc3545;
+    background-color:  #6acb00;
     padding: 12px
 }
 
@@ -53,4 +53,9 @@
     color: #fff;
     background-color: #6acb00;
     border-color: #8fdb00;
+}
+.btn.btn-primary {
+  background: #3f9300 !important;
+  border: 1px solid #69ab00 !important;
+  color: #fff !important;
 }
