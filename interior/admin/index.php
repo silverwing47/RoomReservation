@@ -1,3 +1,37 @@
+<?php
+  ob_start();
+  // $conn =mysqli_connect("localhost","root","","db_resrv");
+  // if ($conn->connect_error) {
+  //   die("Connection failed: " . $conn->connect_error);
+  // }
+  //
+  // $query="SELECT MAX (mycount)FROM (SELECT roomNumber,COUNT(roomNumber) mycount FROM tbl_reservation GROUP BY roomNumber);";
+  // $result = mysqli_query($con,$query);
+  //
+  // echo $result;
+  $con =mysqli_connect("localhost","root","","db_resrv");
+  $err="";
+  if($con){
+    // $sql2 = "SELECT COUNT(roomNumber) FROM tbl_reservation GROUP BY roomNumber ORDER BY COUNT(roomNumber) DESC LIMIT 1";
+    $query="SELECT MAX(roomNumber) FROM tbl_reservation, tbl_room WHERE tbl_reservation.room_id = tbl_room.id GROUP BY roomNumber ORDER BY COUNT(room_id) DESC LIMIT 1";
+    $result = $con->query($query);
+    // $row=mysqli_fetch_row($result);
+    // while($row = $result->fetch_assoc()) {
+    //   echo $row["room_id"];
+    // }
+    // $row2=$result->fetch_row();
+
+    // $sql = "SELECT * FROM tbl_client";
+    // $result = $con->query($sql);
+
+    $test = 2;
+
+    echo $result;
+    // echo "fdsf";
+    }
+?>
+
+
 <!DOCTYPE html>
 <html dir="ltr" lang="en">
   <head>
@@ -60,7 +94,7 @@
             <!-- ============================================================== -->
             <!-- Logo -->
             <!-- ============================================================== -->
-            <a class="navbar-brand" href="index.html">
+            <a class="navbar-brand" href="index.php">
               <!-- Logo icon -->
               <b class="logo-icon ps-2">
                 <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
@@ -474,120 +508,7 @@
           <!-- ============================================================== -->
           <!-- Sales Cards  -->
           <!-- ============================================================== -->
-          <div class="row">
-            <!-- Column -->
-            <div class="col-md-6 col-lg-2 col-xlg-3">
-              <div class="card card-hover">
-                <div class="box bg-cyan text-center">
-                  <h1 class="font-light text-white">
-                    <i class="mdi mdi-view-dashboard"></i>
-                  </h1>
-                  <h6 class="text-white">Dashboard</h6>
-                </div>
-              </div>
-            </div>
-            <!-- Column -->
-            <div class="col-md-6 col-lg-4 col-xlg-3">
-              <div class="card card-hover">
-                <div class="box bg-success text-center">
-                  <h1 class="font-light text-white">
-                    <i class="mdi mdi-chart-areaspline"></i>
-                  </h1>
-                  <h6 class="text-white">Charts</h6>
-                </div>
-              </div>
-            </div>
-            <!-- Column -->
-            <div class="col-md-6 col-lg-2 col-xlg-3">
-              <div class="card card-hover">
-                <div class="box bg-warning text-center">
-                  <h1 class="font-light text-white">
-                    <i class="mdi mdi-collage"></i>
-                  </h1>
-                  <h6 class="text-white">Widgets</h6>
-                </div>
-              </div>
-            </div>
-            <!-- Column -->
-            <div class="col-md-6 col-lg-2 col-xlg-3">
-              <div class="card card-hover">
-                <div class="box bg-danger text-center">
-                  <h1 class="font-light text-white">
-                    <i class="mdi mdi-border-outside"></i>
-                  </h1>
-                  <h6 class="text-white">Tables</h6>
-                </div>
-              </div>
-            </div>
-            <!-- Column -->
-            <div class="col-md-6 col-lg-2 col-xlg-3">
-              <div class="card card-hover">
-                <div class="box bg-info text-center">
-                  <h1 class="font-light text-white">
-                    <i class="mdi mdi-arrow-all"></i>
-                  </h1>
-                  <h6 class="text-white">Full Width</h6>
-                </div>
-              </div>
-            </div>
-            <!-- Column -->
-            <!-- Column -->
-            <div class="col-md-6 col-lg-4 col-xlg-3">
-              <div class="card card-hover">
-                <div class="box bg-danger text-center">
-                  <h1 class="font-light text-white">
-                    <i class="mdi mdi-receipt"></i>
-                  </h1>
-                  <h6 class="text-white">Forms</h6>
-                </div>
-              </div>
-            </div>
-            <!-- Column -->
-            <div class="col-md-6 col-lg-2 col-xlg-3">
-              <div class="card card-hover">
-                <div class="box bg-info text-center">
-                  <h1 class="font-light text-white">
-                    <i class="mdi mdi-relative-scale"></i>
-                  </h1>
-                  <h6 class="text-white">Buttons</h6>
-                </div>
-              </div>
-            </div>
-            <!-- Column -->
-            <div class="col-md-6 col-lg-2 col-xlg-3">
-              <div class="card card-hover">
-                <div class="box bg-cyan text-center">
-                  <h1 class="font-light text-white">
-                    <i class="mdi mdi-pencil"></i>
-                  </h1>
-                  <h6 class="text-white">Elements</h6>
-                </div>
-              </div>
-            </div>
-            <!-- Column -->
-            <div class="col-md-6 col-lg-2 col-xlg-3">
-              <div class="card card-hover">
-                <div class="box bg-success text-center">
-                  <h1 class="font-light text-white">
-                    <i class="mdi mdi-calendar-check"></i>
-                  </h1>
-                  <h6 class="text-white">Calnedar</h6>
-                </div>
-              </div>
-            </div>
-            <!-- Column -->
-            <div class="col-md-6 col-lg-2 col-xlg-3">
-              <div class="card card-hover">
-                <div class="box bg-warning text-center">
-                  <h1 class="font-light text-white">
-                    <i class="mdi mdi-alert"></i>
-                  </h1>
-                  <h6 class="text-white">Errors</h6>
-                </div>
-              </div>
-            </div>
-            <!-- Column -->
-          </div>
+
           <!-- ============================================================== -->
           <!-- Sales chart -->
           <!-- ============================================================== -->
@@ -600,9 +521,15 @@
                       <h4 class="card-title">Site Analysis</h4>
                       <h5 class="card-subtitle">Overview of Latest Month</h5>
                     </div>
+
                   </div>
                   <div class="row">
                     <!-- column -->
+                    <div class="bg-dark p-10 text-white text-center" style = "width:50%;">
+                      <i class="mdi mdi-tag fs-3 mb-1 font-16"></i>
+                      <h5 class="mb-0 mt-1"><?php echo '$result'; ?></h5>
+                      <small class="font-light">Most Booked Room</small>
+                    </div>
                     <div class="col-lg-9">
                       <div class="flot-chart">
                         <div

@@ -4,6 +4,7 @@
   if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
   }
+  // $query="select * from tbl_admin where username='$username' and password='$pwd'";
 ?>
 
 <!DOCTYPE html>
@@ -194,7 +195,7 @@
             else{
               $row=mysqli_fetch_assoc($result);
               $_SESSION['login']=$row['username'];
-              header("Location: index.html");
+              header("Location: index.php");
             }
         }
         }
