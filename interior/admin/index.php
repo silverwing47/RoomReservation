@@ -1,34 +1,23 @@
 <?php
   ob_start();
-  // $conn =mysqli_connect("localhost","root","","db_resrv");
-  // if ($conn->connect_error) {
-  //   die("Connection failed: " . $conn->connect_error);
-  // }
-  //
-  // $query="SELECT MAX (mycount)FROM (SELECT roomNumber,COUNT(roomNumber) mycount FROM tbl_reservation GROUP BY roomNumber);";
-  // $result = mysqli_query($con,$query);
-  //
-  // echo $result;
-  $con =mysqli_connect("localhost","root","","db_resrv");
-  $err="";
-  if($con){
-    // $sql2 = "SELECT COUNT(roomNumber) FROM tbl_reservation GROUP BY roomNumber ORDER BY COUNT(roomNumber) DESC LIMIT 1";
-    $query="SELECT MAX(roomNumber) FROM tbl_reservation, tbl_room WHERE tbl_reservation.room_id = tbl_room.id GROUP BY roomNumber ORDER BY COUNT(room_id) DESC LIMIT 1";
-    $result = $con->query($query);
-    // $row=mysqli_fetch_row($result);
-    // while($row = $result->fetch_assoc()) {
-    //   echo $row["room_id"];
-    // }
-    // $row2=$result->fetch_row();
+  $mysqli = new mysqli("localhost","root","","db_resrv");
 
-    // $sql = "SELECT * FROM tbl_client";
-    // $result = $con->query($sql);
+  if ($mysqli -> connect_errno) {
+    echo "Failed to connect to MySQL: " . $mysqli -> connect_error;
+    exit();
+  }
 
-    $test = 2;
+  $sql = "SELECT MAX(roomNumber) AS max_roomNumber FROM tbl_reservation, tbl_room WHERE tbl_reservation.room_id = tbl_room.id GROUP BY roomNumber ORDER BY COUNT(room_id) DESC LIMIT 1";
+  $result = $mysqli -> query($sql);
 
-    echo $result;
-    // echo "fdsf";
-    }
+  // Associative array
+  $row = $result -> fetch_assoc();
+  // printf ("%s ", $row["max_roomNumber"]);
+  // echo  $row["max_roomNumber"];
+  // Free result set
+  $result -> free_result();
+
+  $mysqli -> close();
 ?>
 
 
@@ -527,7 +516,7 @@
                     <!-- column -->
                     <div class="bg-dark p-10 text-white text-center" style = "width:50%;">
                       <i class="mdi mdi-tag fs-3 mb-1 font-16"></i>
-                      <h5 class="mb-0 mt-1"><?php echo '$result'; ?></h5>
+                      <h5 class="mb-0 mt-1"><?php echo $row["max_roomNumber"]; ?></h5>
                       <small class="font-light">Most Booked Room</small>
                     </div>
                     <div class="col-lg-9">
