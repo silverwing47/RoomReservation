@@ -573,19 +573,21 @@
         <div class="filter">
           Select Room Number:
           <form action="#" method="POST"  >
-            <select name="roomNumber" id="roomNumber" onchange="roomNumber_Show()">
+            <select id="selectRoom" onchange="selectR(this)" onclick="selectR(this)" >
               <option value=NULL>ALL BASTA</option>
-              <!-- <option value="0">0</option>
-              <option value="1">1</option> -->
+              <option value="0">0</option>
+              <option value="1">1</option>
               <?php
-                $rooms="select * from tbl_room";
-                $resultRoom = mysqli_query($mysqli,$rooms);
-                // $count = mysqli_num_rows($result);
-                while($rowRoom = $resultRoom->fetch_assoc()) {
-                echo '<option value="'.$rowRoom['id'].'"> '.$rowRoom['roomNumber'].' </option>';
-                }
+                // $rooms="select * from tbl_room";
+                // $resultRoom = mysqli_query($mysqli,$rooms);
+                // while($rowRoom = $resultRoom->fetch_assoc()) {
+                // echo '<option value="'.$rowRoom['id'].'"> '.$rowRoom['roomNumber'].' </option>';
+                // echo $rowRoom['roomNumber'];
+                // }
+
               ?>
             </select>
+
           </form>
         </div>
 
@@ -1781,16 +1783,17 @@
 
 
     </script>
-    <script>
-      document.getElementById("roomNumber").addEventListener("change", roomNumber_Show);
-      function roomNumber_Show() {
-        var num  = document.getElementById("roomNumber");
-        if(num!=2){
-          <?php header("Location: login.php"); ?>
-        }
-      }
-    </script>
 
 
   </body>
+  <script>
+
+  function selectR() {
+    var x = document.getElementById("selectRoom");
+    // alert(x.options[x.selectedIndex].value);
+    alert(x);
+  }
+
+  </script>
+
 </html>
