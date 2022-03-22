@@ -2,7 +2,6 @@
   ob_start();
   session_start();
 
-  $_SESSION['Room Number']=NULL;
   $mysqli = new mysqli("localhost","root","","db_resrv");
 
   if ($mysqli -> connect_errno) {
@@ -18,20 +17,9 @@
 
   ////////     CALENDAR PHP      ////////
 
-	//Creating database connection.
-	// define('DB_SERVER', 'localhost');
-	// define('DB_USERNAME', 'root');
-	// define('DB_PASSWORD', 'root');
-	// define('DB_DATABASE', 'fullcalendar');
-	// $connection = mysql_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD) or die(mysql_error());
-	// $database   = mysql_select_db(DB_DATABASE) or die(mysql_error());
-	// $conn =mysqli_connect("localhost","root","","db_resrv");
-	// if ($conn->connect_error) {
-	// 	die("Connection failed: " . $conn->connect_error);
-	// }
-
+  $id = $_SESSION['room'];
 	//Selecting events records from events table
-	$query  	= "SELECT * FROM tbl_reservation ";
+	$query  	= "SELECT * FROM tbl_reservation WHERE room_id = " . $id ;
 	$data  = array();
 	$resp = array();
 	$i 			= 0;
@@ -41,7 +29,7 @@
 	if($rowDate > 0){
 		while($data['events'] = mysqli_fetch_assoc($resultDate))
 		{
-
+      // $_SESSION['currentRoom'] = $rowDate['roomNumber'];
 			$i++;
 			//Geting event days
 			$start = date("Y-m-d",strtotime($data['events']['date']));//die;
@@ -571,17 +559,18 @@
         <!-- Bread crumb and right sidebar toggle -->
         <!-- ============================================================== -->
         <div class="filter">
-          Select Room Number:
-          <form action="#" method="POST"  >
-            <select id="selectRoom" onchange="selectR(this)">
+          Select Room Number: 
+          <form action="" method="POST"  >
+            <select name="select" onchange="this.form.submit()">
               <!-- <option value="AllBasta">ALL BASTA</option>
               <option value="0">0</option>
               <option value="1">1</option> -->
+              <option selected hidden value="">Select Room</option>
               <?php
                 $rooms="select * from tbl_room";
                 $resultRoom = mysqli_query($mysqli,$rooms);
                 while($rowRoom = $resultRoom->fetch_assoc()) {
-                    echo '<option value="'.$rowRoom['roomNumber'].'"> '.$rowRoom['roomNumber'].' </option>';
+                    echo '<option value="'.$rowRoom['id'].'"> '.$rowRoom['roomNumber'].' </option>';
                 }
               ?>
             </select>
@@ -705,7 +694,6 @@
     <script>
 
       $(document).ready(function() {
-
         $('#calendar').fullCalendar({
           editable: false,
           events: <?php echo json_encode($resp) ?>,
@@ -713,21 +701,21 @@
         });
 
       });
-
-
-
     </script>
-
-
   </body>
-  <script>
-
-  function selectR() {
-    var x = document.getElementById("selectRoom");
-    alert(x.options[x.selectedIndex].value);
-    // alert(x);
-  }
-
-  </script>
-
 </html>
+<?php
+   if(isset($_POST["select"])){
+       $select=$_POST["select"];
+       $roomSelect="select room_id from tbl_reservation";
+       $resultRoomS = mysqli_query($mysqli,$roomSelect);
+       // while($rowRoomS = $resultRoomS->fetch_assoc()) {
+       //     if($select==$rowRoomS['room_id']){
+       //
+       //     }
+       // }
+       $_SESSION['room']=$select;
+       header("Location: index.php");
+
+   }
+?>
