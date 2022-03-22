@@ -1,25 +1,23 @@
 <?php
   ob_start();
+  session_start();
+
+  $_SESSION['Room Number']=NULL;
   $mysqli = new mysqli("localhost","root","","db_resrv");
 
   if ($mysqli -> connect_errno) {
     echo "Failed to connect to MySQL: " . $mysqli -> connect_error;
     exit();
   }
-
   $sql = "SELECT MAX(roomNumber) AS max_roomNumber FROM tbl_reservation, tbl_room WHERE tbl_reservation.room_id = tbl_room.id GROUP BY roomNumber ORDER BY COUNT(room_id) DESC LIMIT 1";
   $result = $mysqli -> query($sql);
-
-  // Associative array
   $row = $result -> fetch_assoc();
-  // printf ("%s ", $row["max_roomNumber"]);
-  // echo  $row["max_roomNumber"];
-  // Free result set
   $result -> free_result();
 
-  $mysqli -> close();
+  // $mysqli -> close();
 
   ////////     CALENDAR PHP      ////////
+
 	//Creating database connection.
 	// define('DB_SERVER', 'localhost');
 	// define('DB_USERNAME', 'root');
@@ -27,10 +25,10 @@
 	// define('DB_DATABASE', 'fullcalendar');
 	// $connection = mysql_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD) or die(mysql_error());
 	// $database   = mysql_select_db(DB_DATABASE) or die(mysql_error());
-	$conn =mysqli_connect("localhost","root","","db_resrv");
-	if ($conn->connect_error) {
-		die("Connection failed: " . $conn->connect_error);
-	}
+	// $conn =mysqli_connect("localhost","root","","db_resrv");
+	// if ($conn->connect_error) {
+	// 	die("Connection failed: " . $conn->connect_error);
+	// }
 
 	//Selecting events records from events table
 	$query  	= "SELECT * FROM tbl_reservation ";
@@ -38,7 +36,7 @@
 	$resp = array();
 	$i 			= 0;
 	// $row 		= mysql_num_rows($query);
-	$resultDate = mysqli_query($conn,$query);
+	$resultDate = mysqli_query($mysqli,$query);
 	$rowDate = mysqli_num_rows($resultDate);
 	if($rowDate > 0){
 		while($data['events'] = mysqli_fetch_assoc($resultDate))
@@ -103,6 +101,8 @@
 		}
 		$resp = array_values($resp);
 	}
+
+
 ?>
 
 <!DOCTYPE html>
@@ -124,10 +124,9 @@
     <title>Admin Dashboard</title>
 
     <!-- CALENDAR -->
-
     <link href="calendar/css/fullcalendar.css" rel="stylesheet" />
     <link href="calendar/css/fullcalendar.print.css" rel="stylesheet" media="print" />
-
+    <link href="mystyle.css" rel="stylesheet" />
     <!-- Calendar END -->
 
     <!-- Favicon icon -->
@@ -571,6 +570,25 @@
         <!-- ============================================================== -->
         <!-- Bread crumb and right sidebar toggle -->
         <!-- ============================================================== -->
+        <div class="filter">
+          Select Room Number:
+          <form action="#" method="POST"  >
+            <select name="roomNumber" id="roomNumber" onchange="roomNumber_Show()">
+              <option value=NULL>ALL BASTA</option>
+              <!-- <option value="0">0</option>
+              <option value="1">1</option> -->
+              <?php
+                $rooms="select * from tbl_room";
+                $resultRoom = mysqli_query($mysqli,$rooms);
+                // $count = mysqli_num_rows($result);
+                while($rowRoom = $resultRoom->fetch_assoc()) {
+                echo '<option value="'.$rowRoom['id'].'"> '.$rowRoom['roomNumber'].' </option>';
+                }
+              ?>
+            </select>
+          </form>
+        </div>
+
         <div id='calendar'></div>
         <div class="page-breadcrumb">
           <div class="row">
@@ -1760,6 +1778,17 @@
 
       });
 
+
+
+    </script>
+    <script>
+      document.getElementById("roomNumber").addEventListener("change", roomNumber_Show);
+      function roomNumber_Show() {
+        var num  = document.getElementById("roomNumber");
+        if(num!=2){
+          <?php header("Location: login.php"); ?>
+        }
+      }
     </script>
 
 
