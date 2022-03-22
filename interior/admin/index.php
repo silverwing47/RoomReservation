@@ -573,18 +573,16 @@
         <div class="filter">
           Select Room Number:
           <form action="#" method="POST"  >
-            <select id="selectRoom" onchange="selectR(this)" onclick="selectR(this)" >
-              <option value=NULL>ALL BASTA</option>
+            <select id="selectRoom" onchange="selectR(this)">
+              <!-- <option value="AllBasta">ALL BASTA</option>
               <option value="0">0</option>
-              <option value="1">1</option>
+              <option value="1">1</option> -->
               <?php
-                // $rooms="select * from tbl_room";
-                // $resultRoom = mysqli_query($mysqli,$rooms);
-                // while($rowRoom = $resultRoom->fetch_assoc()) {
-                // echo '<option value="'.$rowRoom['id'].'"> '.$rowRoom['roomNumber'].' </option>';
-                // echo $rowRoom['roomNumber'];
-                // }
-
+                $rooms="select * from tbl_room";
+                $resultRoom = mysqli_query($mysqli,$rooms);
+                while($rowRoom = $resultRoom->fetch_assoc()) {
+                    echo '<option value="'.$rowRoom['roomNumber'].'"> '.$rowRoom['roomNumber'].' </option>';
+                }
               ?>
             </select>
 
@@ -1790,8 +1788,8 @@
 
   function selectR() {
     var x = document.getElementById("selectRoom");
-    // alert(x.options[x.selectedIndex].value);
-    alert(x);
+    alert(x.options[x.selectedIndex].value);
+    // alert(x);
   }
 
   </script>
