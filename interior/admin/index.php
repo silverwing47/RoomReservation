@@ -18,8 +18,92 @@
   $result -> free_result();
 
   $mysqli -> close();
-?>
 
+  ////////     CALENDAR PHP      ////////
+	//Creating database connection.
+	// define('DB_SERVER', 'localhost');
+	// define('DB_USERNAME', 'root');
+	// define('DB_PASSWORD', 'root');
+	// define('DB_DATABASE', 'fullcalendar');
+	// $connection = mysql_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD) or die(mysql_error());
+	// $database   = mysql_select_db(DB_DATABASE) or die(mysql_error());
+	$conn =mysqli_connect("localhost","root","","db_resrv");
+	if ($conn->connect_error) {
+		die("Connection failed: " . $conn->connect_error);
+	}
+
+	//Selecting events records from events table
+	$query  	= "SELECT * FROM tbl_reservation ";
+	$data  = array();
+	$resp = array();
+	$i 			= 0;
+	// $row 		= mysql_num_rows($query);
+	$resultDate = mysqli_query($conn,$query);
+	$rowDate = mysqli_num_rows($resultDate);
+	if($rowDate > 0){
+		while($data['events'] = mysqli_fetch_assoc($resultDate))
+		{
+
+			$i++;
+			//Geting event days
+			$start = date("Y-m-d",strtotime($data['events']['date']));//die;
+            $timestamp_start = strtotime($start);
+            $end = date("Y-m-d",strtotime($data['events']['date']));
+            $timestamp_end = strtotime($end);
+            $diff = abs($timestamp_end - $timestamp_start); // that's it!
+
+            $days = floor($diff/(60*60*24));
+            $days = $days+1;
+            //Defining colors to events
+            if($days == 1){
+                $color='#00BEBB';
+            }elseif($days > 1 and $days <= 15){
+                $color='#8FBC8F';
+            }elseif($days > 15 and $days <= 30){
+                $color='#C0C0C0';
+            }elseif($days > 30 and $days <= 60){
+                $color='#90EE90';
+            }else{
+                $color='#F4A460';
+            }
+            //Creating event short name with ...
+            if(!empty($data['events']['name'])){
+                for ($i = 1; $i <= $days; $i++) {
+                	$add_day = $i - 1;
+                    $start = date('Y-m-d', strtotime("+{$add_day} day", $timestamp_start));
+
+                    $event_short_name = substr($data['events']['name'] , 0, 15);
+                    $sub='th';
+                    if($i < 4){
+                        switch ($i){
+                            case 1:
+                            $sub='st';
+                            break;
+                            case 2:
+                            $sub='nd';
+                            break;
+                            case 3:
+                            $sub='rd';
+                            break;
+                        }
+                    }
+                    $event_short_name .= ' - ( Room Number '.$data['events']['room_id'].' )';
+
+                    $startDate = strtotime($start);
+                    //Colecting data in array
+                    $resp[$start . '_' . $data['events']['reserve_number'] . '_' . $i] = array(
+                        'id'    => $data['events']['reserve_number'],
+                        'title' => $event_short_name,
+                        'url'   => '',
+                        'start' => $start,
+                        'color' => $color,
+                    );
+                }
+            }
+		}
+		$resp = array_values($resp);
+	}
+?>
 
 <!DOCTYPE html>
 <html dir="ltr" lang="en">
@@ -38,6 +122,14 @@
     />
     <meta name="robots" content="noindex,nofollow" />
     <title>Admin Dashboard</title>
+
+    <!-- CALENDAR -->
+
+    <link href="calendar/css/fullcalendar.css" rel="stylesheet" />
+    <link href="calendar/css/fullcalendar.print.css" rel="stylesheet" media="print" />
+
+    <!-- Calendar END -->
+
     <!-- Favicon icon -->
     <link
       rel="icon"
@@ -49,6 +141,15 @@
     <link href="assets/libs/flot/css/float-chart.css" rel="stylesheet" />
     <!-- Custom CSS -->
     <link href="dist/css/style.min.css" rel="stylesheet" />
+
+    <style>
+    	#calendar {
+    		max-width: 80%;
+    		margin: 8px;
+        padding: 20px;
+    	}
+
+    </style>
 
   </head>
 
@@ -470,6 +571,7 @@
         <!-- ============================================================== -->
         <!-- Bread crumb and right sidebar toggle -->
         <!-- ============================================================== -->
+        <div id='calendar'></div>
         <div class="page-breadcrumb">
           <div class="row">
             <div class="col-12 d-flex no-block align-items-center">
@@ -501,6 +603,7 @@
           <!-- ============================================================== -->
           <!-- Sales chart -->
           <!-- ============================================================== -->
+
           <div class="row">
             <div class="col-md-12">
               <div class="card">
@@ -1641,5 +1744,24 @@
     <script src="assets/libs/flot/jquery.flot.crosshair.js"></script>
     <script src="assets/libs/flot.tooltip/js/jquery.flot.tooltip.min.js"></script>
     <script src="dist/js/pages/chart/chart-page-init.js"></script>
+    <!-- Calendar -->
+    <script src="calendar/js/moment.min.js"></script>
+    <script src="calendar/js/jquery.min.js"></script>
+    <script src="calendar/js/fullcalendar.min.js"></script>
+    <script>
+
+      $(document).ready(function() {
+
+        $('#calendar').fullCalendar({
+          editable: false,
+          events: <?php echo json_encode($resp) ?>,
+
+        });
+
+      });
+
+    </script>
+
+
   </body>
 </html>
