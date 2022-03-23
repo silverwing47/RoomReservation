@@ -16,6 +16,8 @@
   // $mysqli -> close();
 
   ////////     CALENDAR PHP      ////////
+  $default 	= "SELECT * FROM tbl_reservation";
+  $defaultResult = $mysqli -> query($default);
 
   $id = $_SESSION['room'];
 	//Selecting events records from events table
@@ -559,7 +561,7 @@
         <!-- Bread crumb and right sidebar toggle -->
         <!-- ============================================================== -->
         <div class="filter">
-          Select Room Number: 
+          Select Room Number:
           <form action="" method="POST"  >
             <select name="select" onchange="this.form.submit()">
               <!-- <option value="AllBasta">ALL BASTA</option>
