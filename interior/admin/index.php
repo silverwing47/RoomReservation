@@ -16,32 +16,18 @@
   // $mysqli -> close();
 
   ////////     CALENDAR PHP      ////////
-  // $default 	= "SELECT * FROM tbl_reservation LIMIT 1";
-  // $defaultResult = $mysqli -> query($default);
-  // $defaultRoom = $defaultResult -> fetch_assoc();
-  // $_SESSION['room']==NULL;
-  // $_SESSION['room2']==NULL;
-  // if($_SESSION['room']==NULL){
-  //   $_SESSION['room']==$defaultRoom['room_id'];
-  //   $_SESSION['room2']==$defaultRoom['room_id'];
-  // }
-  // else{
-  //   $id = $_SESSION['room2'];
-  // }
+  $default 	= "SELECT * FROM tbl_reservation LIMIT 1";
+  $defaultResult = $mysqli -> query($default);
+  $defaultRoom = $defaultResult -> fetch_assoc();
 
-
-  // $id = $_SESSION['room'];
-  // $id = 2;
   $session = isset($_SESSION['room']) ? $_SESSION['room'] : '';
 
   if($session==NULL){
-    $id=1;
+    $id = $defaultRoom['room_id'];
   }
   else{
     $id = $session;
   }
-
-  // echo $_SESSION['room'];
 
 	//Selecting events records from events table
 	$query  	= "SELECT * FROM tbl_reservation WHERE room_id = " . $id ;
