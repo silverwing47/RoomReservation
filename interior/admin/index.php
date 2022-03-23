@@ -32,12 +32,13 @@
 
   // $id = $_SESSION['room'];
   // $id = 2;
-  $_SESSION['room'];
-  if($_SESSION['room']==NULL){
+  $session = isset($_SESSION['room']) ? $_SESSION['room'] : '';
+
+  if($session==NULL){
     $id=1;
   }
   else{
-    $id = $_SESSION['room'];
+    $id = $session;
   }
 
   // echo $_SESSION['room'];
