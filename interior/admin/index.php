@@ -32,6 +32,7 @@
 
   // $id = $_SESSION['room'];
   // $id = 2;
+  $_SESSION['room'];
   if($_SESSION['room']==NULL){
     $id=1;
   }
