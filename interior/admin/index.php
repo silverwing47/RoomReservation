@@ -16,9 +16,11 @@
   // $mysqli -> close();
 
   ////////     CALENDAR PHP      ////////
-  $default 	= "SELECT * FROM tbl_reservation";
+  $default 	= "SELECT * FROM tbl_reservation LIMIT 1";
   $defaultResult = $mysqli -> query($default);
+  $row = $defaultResult -> fetch_assoc();
 
+  $_SESSION['room'];
   $id = $_SESSION['room'];
 	//Selecting events records from events table
 	$query  	= "SELECT * FROM tbl_reservation WHERE room_id = " . $id ;
@@ -720,4 +722,5 @@
        header("Location: index.php");
 
    }
+
 ?>
