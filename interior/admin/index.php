@@ -16,12 +16,31 @@
   // $mysqli -> close();
 
   ////////     CALENDAR PHP      ////////
-  $default 	= "SELECT * FROM tbl_reservation LIMIT 1";
-  $defaultResult = $mysqli -> query($default);
-  $row = $defaultResult -> fetch_assoc();
+  // $default 	= "SELECT * FROM tbl_reservation LIMIT 1";
+  // $defaultResult = $mysqli -> query($default);
+  // $defaultRoom = $defaultResult -> fetch_assoc();
+  // $_SESSION['room']==NULL;
+  // $_SESSION['room2']==NULL;
+  // if($_SESSION['room']==NULL){
+  //   $_SESSION['room']==$defaultRoom['room_id'];
+  //   $_SESSION['room2']==$defaultRoom['room_id'];
+  // }
+  // else{
+  //   $id = $_SESSION['room2'];
+  // }
 
-  $_SESSION['room'];
-  $id = $_SESSION['room'];
+
+  // $id = $_SESSION['room'];
+  // $id = 2;
+  if($_SESSION['room']==NULL){
+    $id=1;
+  }
+  else{
+    $id = $_SESSION['room'];
+  }
+
+  // echo $_SESSION['room'];
+
 	//Selecting events records from events table
 	$query  	= "SELECT * FROM tbl_reservation WHERE room_id = " . $id ;
 	$data  = array();
@@ -93,6 +112,15 @@
 		}
 		$resp = array_values($resp);
 	}
+
+  if(isset($_POST["select"])){
+      $select=$_POST["select"];
+      $roomSelect="select room_id from tbl_reservation";
+      $resultRoomS = mysqli_query($mysqli,$roomSelect);
+      $_SESSION['room']=$select;
+      header("Location: index.php");
+
+  }
 
 
 ?>
@@ -709,18 +737,6 @@
   </body>
 </html>
 <?php
-   if(isset($_POST["select"])){
-       $select=$_POST["select"];
-       $roomSelect="select room_id from tbl_reservation";
-       $resultRoomS = mysqli_query($mysqli,$roomSelect);
-       // while($rowRoomS = $resultRoomS->fetch_assoc()) {
-       //     if($select==$rowRoomS['room_id']){
-       //
-       //     }
-       // }
-       $_SESSION['room']=$select;
-       header("Location: index.php");
 
-   }
 
 ?>
