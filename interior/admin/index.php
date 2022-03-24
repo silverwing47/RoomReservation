@@ -618,7 +618,7 @@
             <form action="#" class="signup-form"  method="POST">
               <div class="form-group mb-2">
                 <label >Select Month (Required)</label>
-                <select name="month" class="form-control">
+                <select name="month" class="form-control" id="month">
                   <option value="1">January</option>
                   <option value="2">February</option>
                   <option value="3">March</option>
@@ -645,7 +645,7 @@
               </div>
               <div class="form-group mb-2">
                 <label >Select Day</label>
-                <input type="number" class="form-control" name="day" min="1" max="31">
+                <input type="number" class="form-control" id="day" name="day" min=1>
               </div>
               <br>
               <div class="form-group mb-2">
@@ -718,6 +718,18 @@
     <script src="modal/js/popper.js"></script>
     <script src="modal/js/bootstrap.min.js"></script>
     <script src="modal/js/main.js"></script>
+    <script>
+      document.getElementById('month').addEventListener('change', function() {
+        if (this.value == 2) {
+            document.getElementById('day').max = 28;
+        } else if((this.value == 4 || this.value == 6 || this.value == 9 || this.value == 11)){
+            document.getElementById('day').max= 30;
+        }
+        else{
+          document.getElementById('day').max=31;
+        }
+      });
+    </script>
 
   </body>
 </html>
