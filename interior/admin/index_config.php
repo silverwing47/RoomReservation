@@ -30,7 +30,8 @@
   }
 
 	//Selecting events records from events table
-	$query  	= "SELECT * FROM tbl_reservation WHERE room_id = " . $id ;
+	// $query  	= "SELECT * FROM tbl_reservation INNER JOIN tbl_room ON tbl_reservation.room_id=tbl_room.id where tbl_reservation.room_id=1 AND tbl_room.id=1  "  ;
+  $query  	= "SELECT * FROM tbl_reservation INNER JOIN tbl_room ON tbl_reservation.room_id=tbl_room.id where tbl_reservation.room_id= " . $id. " AND tbl_room.id= " . $id;
 	$data  = array();
 	$resp = array();
 	$i 			= 0;
@@ -84,7 +85,7 @@
                             break;
                         }
                     }
-                    $event_short_name .= ' - ( Room Number '.$data['events']['room_id'].' )';
+                    $event_short_name .= ' - ( Room: '.$data['events']['roomNumber'].' )';
 
                     $startDate = strtotime($start);
                     //Colecting data in array
