@@ -583,7 +583,7 @@
                         </thead>
                         <tbody>
                           <?php
-                            $sql = "SELECT * FROM tbl_reservation WHERE MONTH(date) = 3 GROUP BY date";
+                          
                             $resultFilter = $mysqli->query($sql);
                             if ($resultFilter->num_rows > 0) {
                               while($rowFilter = $resultFilter->fetch_assoc()){
