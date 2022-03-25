@@ -114,7 +114,7 @@
   $sql = "SELECT * FROM tbl_reservation WHERE MONTH(date)=". -1;
   if(isset($_POST["btnFilterEntries"])){
     $month = $_POST["month"];
-    $week = $_POST["week"];
+    // $weeks = $_POST["weeks"];
     $day = $_POST["day"];
     if($day<=0){
         $sql = "SELECT * FROM tbl_reservation WHERE MONTH(date) = $month GROUP BY date";

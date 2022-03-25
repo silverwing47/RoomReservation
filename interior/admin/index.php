@@ -583,7 +583,7 @@
                         </thead>
                         <tbody>
                           <?php
-                          
+
                             $resultFilter = $mysqli->query($sql);
                             if ($resultFilter->num_rows > 0) {
                               while($rowFilter = $resultFilter->fetch_assoc()){
@@ -655,7 +655,7 @@
               </div>
               <div class="form-group mb-2">
                 <label >Select Week</label>
-                <select name="week" id="week" class="form-control">
+                <select name="weeks" id="week" class="form-control">
                   <option value="0">Week #</option>
                   <option value="1">1st week</option>
                   <option value="2">2nd week</option>
