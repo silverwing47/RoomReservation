@@ -579,10 +579,30 @@
                             <th>Date</th>
                             <th>Time Slot</th>
                             <th>Availability (0=Done;1=Pending)</th>
-                            <th>Edit Reservation</th>
                           </tr>
                         </thead>
                         <tbody>
+                          <?php
+                            $sql = "SELECT * FROM tbl_reservation WHERE MONTH(date) = 3 GROUP BY date";
+                            $resultFilter = $mysqli->query($sql);
+                            if ($resultFilter->num_rows > 0) {
+                              while($rowFilter = $resultFilter->fetch_assoc()){
+                                echo "
+                                <tr>
+                                  <td>" . $rowFilter["reserve_number"]. "</td>
+                                  <td>" . $rowFilter["name"] . "</td>
+                                  <td>" . $rowFilter["address"]. "</td>
+                                  <td>" . $rowFilter["phone"] . "</td>
+                                  <td>" . $rowFilter["room_id"] . "</td>
+                                  <td>" . $rowFilter["date"] . "</td>
+                                  <td>" . $rowFilter["timeslot"] . "</td>
+                                  <td>" . $rowFilter["status"] . "</td>
+                                </tr>";
+
+                              }
+                            }
+                          ?>
+                        </tbody>
                       </table>
                     </div>
                   </div>
@@ -635,7 +655,8 @@
               </div>
               <div class="form-group mb-2">
                 <label >Select Week</label>
-                <select name="week" class="form-control">
+                <select name="week" id="week" class="form-control">
+                  <option value="0">Week #</option>
                   <option value="1">1st week</option>
                   <option value="2">2nd week</option>
                   <option value="3">3rd week</option>
@@ -729,6 +750,32 @@
           document.getElementById('day').max=31;
         }
       });
+
+      document.getElementById('week').addEventListener('change', function() {
+        if (this.value>0) {
+            document.getElementById('day').placeholder = "Selecting week disables day";
+            document.getElementById('day').value = null;
+            document.getElementById('day').disabled = true;
+
+        }
+        else{
+          document.getElementById('day').placeholder = "";
+          document.getElementById('day').value = null;
+          document.getElementById('day').disabled = false;
+        }
+      });
+
+      document.getElementById('day').addEventListener('change', function() {
+        if (this.value>0) {
+            document.getElementById('week').disabled = true;
+            document.getElementById('week').val = 0;
+        }
+        else{
+          document.getElementById('week').value = 0;
+          document.getElementById('week').disabled = false;
+        }
+      });
+
     </script>
 
   </body>
